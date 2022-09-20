@@ -2137,8 +2137,8 @@ input, select, textarea {
 					width: calc(25% - 0.375em);
 				}
 
-				.loginError{
-					color: red;
+				.errorMessage{
+					color: darkred;
 					font-weight: 600;
 				}
 				.hidden{

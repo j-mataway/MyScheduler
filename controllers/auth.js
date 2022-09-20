@@ -11,7 +11,7 @@ exports.postLogin = (req, res, next) => {
 
   if (validationErrors.length) {
     req.flash("errors", validationErrors);
-    return res.redirect("/");
+    return res.render("index.ejs", {errors: validationErrors});
   }
 
   passport.authenticate("local", (err, user, info) => {
@@ -50,18 +50,15 @@ exports.getCreateNewUser = (req, res) =>{
 
 exports.postCreateUser = (req, res, next) => {
   const validationErrors = [];
-  console.log(req.body)
   if (!validator.isEmail(req.body.email))
-    validationErrors.push({ msg: "Please enter a valid email address." });
+    validationErrors.push('validEmailError');
   if (!validator.isLength(req.body.password, { min: 8 }))
-    validationErrors.push({
-      msg: "Password must be at least 8 characters long",
-    });
+    validationErrors.push('passwordLengthError');
   if (req.body.password !== req.body.confirmPassword)
-    validationErrors.push({ msg: "Passwords do not match" });
+    validationErrors.push('passwordMatchError');
   if (validationErrors.length) {
     req.flash("errors", validationErrors);
-    return res.redirect("../createUser");
+    return res.render("createnewuser.ejs", {errors: validationErrors});
   }
   req.body.email = validator.normalizeEmail(req.body.email, {
     gmail_remove_dots: false,
@@ -84,10 +81,11 @@ exports.postCreateUser = (req, res, next) => {
         return next(err);
       }
       if (existingUser) {
+        validationErrors.push('uniqueUserError')
         req.flash("errors", {
           msg: "Account with that email address or username already exists.",
         });
-        return res.redirect("../profile");
+        return res.render("createnewuser.ejs", {errors: validationErrors});
       }
       user.save((err) => {
         if (err) {

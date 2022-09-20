@@ -21,18 +21,27 @@
                                   <div class="fields">
                                       <div class="field">
                                           <label for="username">Username</label>
-                                          <input type="text" name="username" id="username" />                                        
-                                          <p class = "hidden usernameError">Username already exists, please try again</p>
+                                          <input type="text" name="username" id="username" />
+                                          <% if (locals.errors && locals.errors.includes('uniqueUserError')) { %>                                    
+                                          <p class = "errorMessage">Username or Account registered to this Email already exists, please try again</p> 
+                                          <% } %> 
                                       </div>
                                       <div class="field">
                                         <label for="email">Email</label>
                                         <input type="email" name="email" id="email" />
-                                        <p class = "hidden emailError">Not a valid email, please try again</p>
+                                        <% if (locals.errors && locals.errors.includes('validEmailError')) { %>                                        
+                                        <p class = "errorMessage">Not a valid email, please try again</p>
+                                        <% } %>
                                     </div>
                                       <div class="field">
                                           <label for="password">Password</label>
                                           <input type="password" name="password" id="password" />
-                                          <p class = "hidden passwordError">Passwords do not match, please try again</p>
+                                          <% if (locals.errors && locals.errors.includes('passwordMatchError')) { %> 
+                                          <p class = "errorMessage">Passwords do not match, please try again</p>
+                                          <% } %>
+                                          <% if (locals.errors && locals.errors.includes('passwordLengthError')) { %> 
+                                            <p class = "errorMessage">Passwords must be at least 8 characters</p>
+                                          <% } %>
                                       </div>
                                       <div class="field">
                                         <label for="confirmPassword">Confirm Password</label>
