@@ -2,15 +2,6 @@ const passport = require("passport");
 const validator = require("validator");
 const User = require("../models/User");
 
-exports.getLogin = (req, res) => {
-  if (req.user) {
-    return res.redirect("/profile");
-  }
-  res.render("login", {
-    title: "Login",
-  });
-};
-
 exports.postLogin = (req, res, next) => {
   const validationErrors = [];
   if (!validator.isEmail(req.body.email))
@@ -20,7 +11,7 @@ exports.postLogin = (req, res, next) => {
 
   if (validationErrors.length) {
     req.flash("errors", validationErrors);
-    return res.redirect("/login");
+    return res.redirect("/");
   }
   req.body.email = validator.normalizeEmail(req.body.email, {
     gmail_remove_dots: false,
@@ -32,7 +23,7 @@ exports.postLogin = (req, res, next) => {
     }
     if (!user) {
       req.flash("errors", info);
-      return res.redirect("/login");
+      return res.redirect("/");
     }
     req.logIn(user, (err) => {
       if (err) {
@@ -56,17 +47,13 @@ exports.logout = (req, res) => {
   });
 };
 
-exports.getSignup = (req, res) => {
-  if (req.user) {
-    return res.redirect("/profile");
-  }
-  res.render("signup", {
-    title: "Create Account",
-  });
-};
+exports.getCreateNewUser = (req, res) =>{
+  res.render("createnewuser.ejs");
+}
 
-exports.postSignup = (req, res, next) => {
+exports.postCreateUser = (req, res, next) => {
   const validationErrors = [];
+  console.log(req.body)
   if (!validator.isEmail(req.body.email))
     validationErrors.push({ msg: "Please enter a valid email address." });
   if (!validator.isLength(req.body.password, { min: 8 }))
@@ -75,22 +62,25 @@ exports.postSignup = (req, res, next) => {
     });
   if (req.body.password !== req.body.confirmPassword)
     validationErrors.push({ msg: "Passwords do not match" });
-
   if (validationErrors.length) {
     req.flash("errors", validationErrors);
-    return res.redirect("../signup");
+    return res.redirect("../createUser");
   }
   req.body.email = validator.normalizeEmail(req.body.email, {
     gmail_remove_dots: false,
   });
-
   const user = new User({
-    userName: req.body.userName,
+    username: req.body.username,
     email: req.body.email,
     password: req.body.password,
+    firstName: req.body.firstname,
+    lastName: req.body.lastname,
+    payRate: req.body.payrate,
+    typeOfPay: req.body.typeofpay,
+    position: req.body.position,
+    locationNumber: req.body.location,
   });
-
-  User.findOne(
+  User.findOne(    
     { $or: [{ email: req.body.email }, { userName: req.body.userName }] },
     (err, existingUser) => {
       if (err) {
@@ -100,19 +90,14 @@ exports.postSignup = (req, res, next) => {
         req.flash("errors", {
           msg: "Account with that email address or username already exists.",
         });
-        return res.redirect("../signup");
+        return res.redirect("../profile");
       }
       user.save((err) => {
         if (err) {
           return next(err);
         }
-        req.logIn(user, (err) => {
-          if (err) {
-            return next(err);
-          }
-          res.redirect("/profile");
+          res.redirect("../profile");
         });
       });
     }
-  );
-};
+  

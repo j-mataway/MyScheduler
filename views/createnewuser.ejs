@@ -1,0 +1,81 @@
+<%- include('partials/header') -%>
+<!-- Page Wrapper -->
+<div id="page-wrapper">
+  <!-- Banner -->
+    <section id="banner">
+      <div class="inner">
+        <!-- LOGO GOES HERE -->
+                      <div class="logo"><img src="" class="icon" alt=""></div>
+        <h2>*INSERT NAME*</h2>
+      </div>
+    </section>
+
+  <!-- Wrapper -->
+    <section id="wrapper">
+
+      <!-- One -->
+        <section id="one" class="wrapper spotlight style1">
+          <div class="inner">
+            <h3>Create New Employee Profile</h3>
+                              <form method="post" action="/createUser">
+                                  <div class="fields">
+                                      <div class="field">
+                                          <label for="username">Username</label>
+                                          <input type="text" name="username" id="username" />                                        
+                                          <p class = "hidden usernameError">Username already exists, please try again</p>
+                                      </div>
+                                      <div class="field">
+                                        <label for="email">Email</label>
+                                        <input type="email" name="email" id="email" />
+                                        <p class = "hidden emailError">Not a valid email, please try again</p>
+                                    </div>
+                                      <div class="field">
+                                          <label for="password">Password</label>
+                                          <input type="password" name="password" id="password" />
+                                          <p class = "hidden passwordError">Passwords do not match, please try again</p>
+                                      </div>
+                                      <div class="field">
+                                        <label for="confirmPassword">Confirm Password</label>
+                                        <input type="password" name="confirmPassword" id="confirmPassword" />
+                                    </div>
+                                      <div class="field">
+                                        <label for="firstname">First Name</label>
+                                        <input type="text" name="firstname" id="firstname" />
+                                    </div>
+                                    <div class="field">
+                                        <label for="lastname">Last Name</label>
+                                        <input type="text" name="lastname" id="lastname" />
+                                    </div>
+                                    <div class="field">
+                                        <label for="payrate">Pay Rate</label>
+                                        <input type="text" name="payrate" id="payrate" class="smallerbox" />
+                                        <input type="radio" id="hourly" name="typeofpay" value="hourly" checked/>
+                                        <label for="hourly">Hourly</label>
+                                        <input type="radio" id="salary" name="typeofpay" value="salary"/>
+                                        <label for="salary">Salary</label>
+                                    </div>
+                                    <div class="field">
+                                      <label for="position">Position</label>
+                                      <select name="position" id="position">
+                                        <option value="admin">Admin</option>
+                                        <option value="districtmanager">District Manager</option>
+                                        <option value="generalmanager">General Manager</option>
+                                        <option value="manager">Manager</option>
+                                        <option value="crew">Crew</option>
+                                      </select>
+                                      <div class="field">
+                                        <label for="location">Location</label>
+                                        <input type="text" name="location" id="location" class="smallerbox" />
+                                        </select>
+                                       </div>
+
+                                    </div>
+                                  </div>  
+                                  <ul class="actions">
+                                      <li><input type="submit" value="Submit" /></li>
+                                  </ul>
+                              </form>
+
+          </div>
+        </section>
+        <%- include('partials/footer') -%>

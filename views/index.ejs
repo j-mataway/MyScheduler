@@ -1,11 +1,39 @@
 <%- include('partials/header') -%>
+<!-- Page Wrapper -->
+<div id="page-wrapper">
+  <!-- Banner -->
+    <section id="banner">
+      <div class="inner">
+        <!-- LOGO GOES HERE -->
+                      <div class="logo"><img src="" class="icon" alt=""></div>
+        <h2>*INSERT NAME*</h2>
+        <p>Please Login to Continue</p>
+      </div>
+    </section>
 
-<main class="container">
-    <div class="row justify-content-around mt-5">
-        <a href="/login" class="col-3 btn btn-primary"> Login</a>
-        <a href="/signup" class="col-3 btn btn-primary"> Signup</a>
-    </div>
-</main>
-    
+  <!-- Wrapper -->
+    <section id="wrapper">
 
-<%- include('partials/footer') -%>
+      <!-- One -->
+        <section id="one" class="wrapper spotlight style1">
+          <div class="inner">
+                              <form method="post" action="/getUsers">
+                                  <div class="fields">
+                                      <div class="field">
+                                          <label for="username">Username</label>
+                                          <input type="text" name="username" id="username" />
+                                      </div>
+                                      <div class="field">
+                                          <label for="password">Password</label>
+                                          <input type="text" name="password" id="password" />
+                                      </div>
+                                  </div>
+                                  <p class = "hidden loginError">Username or password incorrect, please try again</p>
+                                  <ul class="actions">
+                                      <li><input type="submit" value="Log In" /></li>
+                                  </ul>
+                              </form>
+
+          </div>
+        </section>
+        <%- include('partials/footer') -%>
