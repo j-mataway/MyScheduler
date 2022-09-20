@@ -4,8 +4,8 @@ const User = require("../models/User");
 
 exports.postLogin = (req, res, next) => {
   const validationErrors = [];
-  if (!validator.isEmail(req.body.email))
-    validationErrors.push({ msg: "Please enter a valid email address." });
+  if (validator.isEmpty(req.body.username))
+    validationErrors.push({ msg: "Please enter a valid username." });
   if (validator.isEmpty(req.body.password))
     validationErrors.push({ msg: "Password cannot be blank." });
 
@@ -13,9 +13,6 @@ exports.postLogin = (req, res, next) => {
     req.flash("errors", validationErrors);
     return res.redirect("/");
   }
-  req.body.email = validator.normalizeEmail(req.body.email, {
-    gmail_remove_dots: false,
-  });
 
   passport.authenticate("local", (err, user, info) => {
     if (err) {
@@ -96,6 +93,7 @@ exports.postCreateUser = (req, res, next) => {
         if (err) {
           return next(err);
         }
+        req.flash("success", { msg: "New user created." });
           res.redirect("../profile");
         });
       });
