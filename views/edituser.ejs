@@ -1,0 +1,44 @@
+<%- include('partials/header') -%>
+<!-- Page Wrapper -->
+<div id="page-wrapper">
+  <!-- Banner -->
+    <section id="banner">
+      <div class="inner">
+        <!-- LOGO GOES HERE -->
+                      <div class="logo"><img src="" class="icon" alt=""></div>
+        <h2>*INSERT NAME*</h2>
+      </div>
+    </section>
+
+  <!-- Wrapper -->
+    <section id="wrapper">
+
+      <!-- One -->
+        <section id="one" class="wrapper spotlight style1">
+          <div class="inner">
+            <h3>Edit Employee</h3>
+            <form>
+                <div class="features">
+                <label for="location" >Location</label>
+                <select name="location" class="location">
+                        <option value="none" selected disabled hidden> Select a Location </option>
+                    <% for(let i = 0; i<locations.length; i++) { %>
+                        <option value="<%=`${locations[i].locationName}`%>"%>"><%=`${locations[i].locationName}` %></option>
+                    <% } %>   
+                    </select> 
+                <ul class="actions">
+                    <li><input type="submit" value="Submit"/></li>
+                </ul>
+            </form>
+
+          </div>
+        </section>
+        <section id="two" class="wrapper alt spotlight style2">
+          <div class="inner">
+            <div class ="features">
+              <a href="/profile" class="button">Back</a>
+              <a href="/logout" class="button">Logout</a>
+            </div>  
+          </div>
+        </section>
+        <%- include('partials/footer') -%>
