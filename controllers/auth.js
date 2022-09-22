@@ -44,9 +44,14 @@ exports.logout = (req, res) => {
   });
 };
 
-exports.getCreateNewUser = (req, res) =>{
-  res.render("createnewuser.ejs");
+exports.getCreateNewUser = async (req, res) => {
+    try {
+      res.render("createnewuser.ejs", { user: req.user });
+    } catch (err) {
+      console.log(err);
+    }
 }
+
 
 exports.postCreateUser = (req, res, next) => {
   const validationErrors = [];
@@ -74,8 +79,8 @@ exports.postCreateUser = (req, res, next) => {
     position: req.body.position,
     locationNumber: req.body.location,
   });
-  User.findOne(    
-    { $or: [{ email: req.body.email }, { userName: req.body.userName }] },
+  User.findOne(
+    { $or: [{ email: req.body.email }, { username: req.body.username }] },
     (err, existingUser) => {
       if (err) {
         return next(err);

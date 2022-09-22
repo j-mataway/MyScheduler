@@ -2,16 +2,19 @@ const express = require("express");
 const router = express.Router();
 const authController = require("../controllers/auth");
 const homeController = require("../controllers/home");
-const postsController = require("../controllers/posts");
+const profilesController = require("../controllers/profiles");
+const locationsController = require("../controllers/locations");
 const { ensureAuth, ensureGuest } = require("../middleware/auth");
 
 //Main Routes - working
 router.get("/", homeController.getIndex);
-router.get("/createUser", authController.getCreateNewUser);
-router.post("/login", authController.postLogin);
 router.get("/logout", authController.logout);
+router.get("/profile", ensureAuth, profilesController.getProfile);
+router.get("/createUser", authController.getCreateNewUser);
+router.get("/createLocation", locationsController.getCreateLocation);
+
+
+router.post("/login", authController.postLogin);
 router.post("/createUser", authController.postCreateUser);
-//routes i may not need? modify?
-router.get("/profile", ensureAuth, postsController.getProfile);
-router.get("/feed", ensureAuth, postsController.getFeed);
+router.post("/createLocation", locationsController.postCreateLocation);
 module.exports = router;

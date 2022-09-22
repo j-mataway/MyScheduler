@@ -1,0 +1,66 @@
+<%- include('partials/header') -%>
+<!-- Page Wrapper -->
+<div id="page-wrapper">
+  <!-- Banner -->
+    <section id="banner">
+      <div class="inner">
+        <!-- LOGO GOES HERE -->
+                      <div class="logo"><img src="" class="icon" alt=""></div>
+        <h2>*INSERT NAME*</h2>
+      </div>
+    </section>
+
+  <!-- Wrapper -->
+    <section id="wrapper">
+
+      <!-- One -->
+        <section id="one" class="wrapper spotlight style1">
+          <div class="inner">
+            <h3>Create New Location</h3>
+            <form method="post" action="/createLocation">
+                <div class="fields">
+                    <div class="field">
+                        <label for="locationName">Name</label>
+                        <input type="text" name="locationName" id="locationName" />
+                        <% if (locals.errors && locals.errors.includes('uniqueUserError')) { %>                                    
+                        <p class = "errorMessage">Username or Account registered to this Email already exists, please try again</p> 
+                        <% } %> 
+                    </div>
+                    <div class="field">
+                      <label for="locationNumber">Number</label>
+                      <input type="text" name="locationNumber" id="locationNumber" />
+                      <% if (locals.errors && locals.errors.includes('uniqueUserError')) { %>                                    
+                      <p class = "errorMessage">Username or Account registered to this Email already exists, please try again</p> 
+                      <% } %> 
+                    </div>
+                    <div class="field">
+                      <label for="locationAdmin">Admin - This is who will be able to approve schedules and edit location information</label>
+                      <input type="text" name="locationAdmin" id="locationAdmin" />
+                    </div>
+                    <div class="field">
+                      <label for="locationGM">General Manager - This will be who is in charge of writing schedules and maintaining employee hierarchy</label>
+                      <input type="text" name="locationGM" id="locationGM" />
+                    </div><div class="field">
+                      <label for="locationManagers">Managers - Will run shifts</label>
+                      <input type="text" name="locationManagers" id="locationManagers" />
+                    </div><div class="field">
+                      <label for="locationCrew">Crew - everyone else</label>
+                      <input type="text" name="locationCrew" id="locationCrew" />
+                    </div>                       
+                </div>  
+                <ul class="actions">
+                    <li><input type="submit" value="Submit" /></li>
+                </ul>
+            </form>
+
+          </div>
+        </section>
+        <section id="two" class="wrapper alt spotlight style2">
+          <div class="inner">
+            <div class ="features">
+              <a href="/profile" class="button">Back</a>
+              <a href="/logout" class="button">Logout</a>
+            </div>  
+          </div>
+        </section>
+        <%- include('partials/footer') -%>

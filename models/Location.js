@@ -12,6 +12,9 @@ const LocationSchema = new mongoose.Schema({
   admin: [{
     type: String,
   }],
+  gm: [{
+    type: String,
+  }],
   managers: [{
     type: String,
   }],

@@ -66,10 +66,14 @@
                                     <div class="field">
                                       <label for="position">Position</label>
                                       <select name="position" id="position">
+                                        <% if(user.position === 'admin') { %>
                                         <option value="admin">Admin</option>
                                         <option value="districtmanager">District Manager</option>
+                                        <% } %>
+                                        <% if(user.position === 'admin' || user.position ==="districtmanager") { %>
                                         <option value="generalmanager">General Manager</option>
-                                        <option value="manager">Manager</option>
+                                        <% } %>
+                                        <option value="manager">Manager</option>                                        
                                         <option value="crew">Crew</option>
                                       </select>
                                       <div class="field">
@@ -85,6 +89,14 @@
                                   </ul>
                               </form>
 
+          </div>
+        </section>
+        <section id="two" class="wrapper alt spotlight style2">
+          <div class="inner">
+            <div class ="features">
+              <a href="/profile" class="button">Back</a>
+              <a href="/logout" class="button">Logout</a>
+            </div>  
           </div>
         </section>
         <%- include('partials/footer') -%>

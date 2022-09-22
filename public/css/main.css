@@ -3045,6 +3045,12 @@ input, select, textarea {
 					width: 100%;
 				}
 
+					.features .button{
+						margin: 2em 1em;
+						max-width: 25%;
+						min-width: 200px;
+					}
+
 		@media screen and (max-width: 980px) {
 
 			.features article {
