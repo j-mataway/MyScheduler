@@ -12,6 +12,7 @@ const mainRoutes = require("./routes/main");
 const profileRoutes = require("./routes/profiles");
 const userRoutes = require("./routes/users");
 const locationRoutes = require("./routes/locations");
+const scheduleRoutes = require("./routes/schedules");
 
 
 //Use .env file in config folder
@@ -61,6 +62,7 @@ app.use("/", mainRoutes);
 app.use("/profile", profileRoutes);
 app.use("/editUser", userRoutes);
 app.use("/locations", locationRoutes);
+app.use("/schedules", scheduleRoutes);
 //Server Running
 app.listen(process.env.PORT, () => {
   console.log(`Server is running on port ${process.env.PORT}`);

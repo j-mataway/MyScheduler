@@ -5,6 +5,7 @@ const homeController = require("../controllers/home");
 const profilesController = require("../controllers/profiles");
 const locationsController = require("../controllers/locations");
 const usersController = require("../controllers/users");
+const schedulesController = require("../controllers/schedules");
 const { ensureAuth, ensureGuest } = require("../middleware/auth");
 
 //Main Routes - working
@@ -15,6 +16,7 @@ router.get("/createUser", authController.getCreateNewUser);
 router.get("/createLocation", locationsController.getCreateLocation);
 router.get("/editUser", usersController.getEditUser)
 router.get("/editLocation", locationsController.getEditLocation)
+router.get("/newSchedule", schedulesController.getNewSchedule)
 
 router.post("/login", authController.postLogin);
 router.post("/createUser", authController.postCreateUser);
