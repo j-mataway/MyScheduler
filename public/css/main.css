@@ -3426,10 +3426,10 @@ input, select, textarea {
 				cursor: default;
 				display: inline-block;
 				font-size: 2em;
-				height: 2.25em;
-				line-height: 2.25em;
+				height: 6em;
+				line-height: 6em;
 				text-align: center;
-				width: 2.25em;
+				width: 6em;
 			}
 
 		#banner h2 {
