@@ -1,0 +1,55 @@
+<%- include('partials/header') -%>
+<!-- Page Wrapper -->
+<div id="page-wrapper">
+  <!-- Banner -->
+    <section id="banner">
+      <div class="inner">
+        <div class="logo"><img src="/images/logo.png" class="icon" alt=""></div>    
+        <h2>KJ Pizza - MySchedule</h2>
+      </div>
+    </section>
+
+  <!-- Wrapper -->
+    <section id="wrapper">
+
+      <!-- One -->
+        <section id="one" class="wrapper spotlight style1">
+          <div class="inner">
+            <h3>Edit Location</h3>
+           <% if (!location) { %>
+            <form method="get" action="/locations/getLocation">
+                <div class="features">
+                    <label for="location" >Select Location</label>
+                    <select name="location" class="location">
+                            <option value="none" selected disabled hidden> Select a Location </option>
+                        <% for(let i = 0; i<locations.length; i++) { %>
+                            <option value="<%=`${locations[i].locationName}`%>"% name="location"><%=`${locations[i].locationName}` %></option>
+                        <% } %>   
+                        </select> 
+                <ul class="actions">
+                    <li><input type="submit" value="Submit" /></li>
+                </ul>
+            </form>
+            <% }else{ %>
+                <form method="post" action="/locations/<%= location._id %>?_method=put">
+                    <div class="features">
+                       <label for="locationname">Location Name</label>
+                       <input type="text" name="locationname" id="locationname" value="<%=location.locationName%>">
+                       <label for="locationnumber">Location Number</label>
+                       <input type="text" name="locationnumber" id="locationnumber" value="<%=location.locationNumber%>">          
+                    <ul class="actions">
+                        <li><input type="submit" value="Submit" /></li>
+                    </ul>
+                </form>
+                <% } %>
+        </div>
+        </section>
+        <section id="two" class="wrapper alt spotlight style2">
+          <div class="inner">
+            <div class ="features">
+              <a href="/profile" class="button">Back</a>
+              <a href="/logout" class="button">Logout</a>
+            </div>  
+          </div>
+        </section>
+        <%- include('partials/footer') -%>

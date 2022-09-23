@@ -23,4 +23,39 @@ exports.postCreateLocation = async (req, res) => {
         console.log(err);
       }
     }
+ }
+exports.getEditLocation = async (req, res) =>{
+    try{
+        const location = null 
+        const locations = await Location.find().lean()
+        res.render("editlocation.ejs", {locations: locations, location:location })
+    }   catch (err){
+        console.log(err)
+    }
+}
+exports.getLocation = async (req, res) =>{
+  try{
+    const locations = await Location.find().lean()
+    const location = await Location.findOne({locationName: req.query.location}).lean()
+     res.render(`editlocation.ejs`, {location:location, locations:locations})     
   }
+  catch(err){
+      console.log(err)
+  }
+}
+exports.editLocation = async (req, res) =>{
+  console.log(req.body)
+  try{
+      await Location.findOneAndUpdate(
+          {_id: req.params.id},
+          {
+            locationName: req.body.locationname,
+            locationNumber: req.body.locationnumber,
+          } 
+      )
+     res.redirect(`/editLocation`)     
+  }
+  catch(err){
+      console.log(err)
+  }
+}
