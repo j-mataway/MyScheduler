@@ -9,18 +9,6 @@ const LocationSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
-  admin: [{
-    type: String,
-  }],
-  gm: [{
-    type: String,
-  }],
-  managers: [{
-    type: String,
-  }],
-  crew: [{
-    type: String,
-  }],
 });
 
 module.exports = mongoose.model("Location", LocationSchema);

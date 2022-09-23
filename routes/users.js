@@ -4,6 +4,7 @@ const usersController = require("../controllers/users");
 const { ensureAuth, ensureGuest } = require("../middleware/auth");
 
 
-router.get("/:location", usersController.getEmployees)
-
+router.get("/getEmployees", usersController.getEmployees)
+router.get("/getEmployee", usersController.getEmployee)
+router.put("/:id", usersController.editUser)
 module.exports = router;

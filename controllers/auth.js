@@ -1,6 +1,7 @@
 const passport = require("passport");
 const validator = require("validator");
 const User = require("../models/User");
+const Locations = require("../models/Location")
 
 exports.postLogin = (req, res, next) => {
   const validationErrors = [];
@@ -46,7 +47,8 @@ exports.logout = (req, res) => {
 
 exports.getCreateNewUser = async (req, res) => {
     try {
-      res.render("createnewuser.ejs", { user: req.user });
+      const locations = await Locations.find().lean()
+      res.render("createnewuser.ejs", { user: req.user, locations: locations });
     } catch (err) {
       console.log(err);
     }
@@ -77,7 +79,7 @@ exports.postCreateUser = (req, res, next) => {
     payRate: req.body.payrate,
     typeOfPay: req.body.typeofpay,
     position: req.body.position,
-    locationNumber: req.body.location,
+    location: req.body.location,
   });
   User.findOne(
     { $or: [{ email: req.body.email }, { username: req.body.username }] },

@@ -76,12 +76,16 @@
                                         <option value="manager">Manager</option>                                        
                                         <option value="crew">Crew</option>
                                       </select>
+                                      <!-- change to location dropdown menu -->
                                       <div class="field">
                                         <label for="location">Location</label>
-                                        <input type="text" name="location" id="location" class="smallerbox" />
-                                        </select>
-                                       </div>
-
+                                        <select name="location" id="location">
+                                          <option value="none" selected disabled hidden> Select a Location </option>
+                                          <% for(let i = 0; i<locations.length; i++) { %>
+                                            <option value="<%=`${locations[i].locationName}`%>"%>"><%=`${locations[i].locationNumber} - ${locations[i].locationName}` %></option>
+                                          <% } %>   
+                                        </select>                                       
+                                       </div>                                      
                                     </div>
                                   </div>  
                                   <ul class="actions">

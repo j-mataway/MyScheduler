@@ -7,14 +7,15 @@ exports.getCreateLocation = (req, res) =>{
     else redirect("/profile")
   }
 exports.postCreateLocation = async (req, res) => {
-      try {
-        await Location.create({
+    const existingLocationName = await Location.find({locationName:req.body.locationName})
+    const existingLocationNumber = await Location.find({locationNumber:req.body.locationNumber})
+      if(existingLocationName.length>0 || existingLocationNumber.length>0){
+        res.render("createnewlocation.ejs", {existingLocation:true})
+      }else{    
+  try {
+       await Location.create({
           locationName: req.body.locationName,
           locationNumber: req.body.locationNumber,
-          admin: req.body.locationAdmin,
-          gm: req.body.locationGM,
-          managers: req.body.locationManagers,
-          crew: req.body.locationCrew,
         });
         console.log("New Location has been created");
         res.redirect("/profile");
@@ -22,3 +23,4 @@ exports.postCreateLocation = async (req, res) => {
         console.log(err);
       }
     }
+  }

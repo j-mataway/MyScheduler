@@ -17,20 +17,138 @@
         <section id="one" class="wrapper spotlight style1">
           <div class="inner">
             <h3>Edit Employee</h3>
-            <form>
+            <% if(!locationEmployees && !employee) { %>
+            <form action="/editUser/getEmployees" method="get">
                 <div class="features">
-                <label for="location" >Location</label>
+                <label for="location" >Select Employee Home Location</label>
                 <select name="location" class="location">
                         <option value="none" selected disabled hidden> Select a Location </option>
                     <% for(let i = 0; i<locations.length; i++) { %>
-                        <option value="<%=`${locations[i].locationName}`%>"%>"><%=`${locations[i].locationName}` %></option>
+                        <option value="<%=`${locations[i].locationName}`%>"% name="location"><%=`${locations[i].locationName}` %></option>
                     <% } %>   
                     </select> 
                 <ul class="actions">
                     <li><input type="submit" value="Submit"/></li>
                 </ul>
             </form>
+            <% } %>    
+            <% if(locationEmployees) { %>
+                <form action="/editUser/getEmployee" method="get">
+                    <div class="features">
+                    <label for="employees" >Select Employee to edit</label>
+                    <select name="employees" class="employees">
+                            <option value="none" selected disabled hidden> Select an Employee </option>
+                        <% for(let i = 0; i<locationEmployees.length; i++) { %>
+                            <option value="<%=`${locationEmployees[i].firstName} ${locationEmployees[i].lastName}`%>"% name="employee"><%=`${locationEmployees[i].firstName} ${locationEmployees[i].lastName}`%></option>
+                        <% } %>   
+                        </select> 
+                    <ul class="actions">
+                        <li><input type="submit" value="Submit"/></li>
+                    </ul>
+                </form>
+                <% } %> 
+             <% if(employee) {console.log(employee) %>
 
+                <form method="post" action="/editUser/<%=employee._id%>?_method=PUT">   
+                <div class="fields">
+                    <div class="field">
+                        <label for="username">Username</label>
+                        <input type="text" name="username" id="username" value="<%=employee.username%>" />
+                        <!-- <p class = "errorMessage">Username or Account registered to this Email already exists, please try again</p>  -->
+                    </div>
+                    <div class="field">
+                      <label for="email">Email</label>
+                      <input type="email" name="email" id="email" value="<%=employee.email%>" />                                     
+                      <!-- <p class = "errorMessage">Not a valid email, please try again</p> -->
+                    </div>
+                    <div class="field">
+                      <label for="firstname">First Name</label>
+                      <input type="text" name="firstname" id="firstname" value="<%=employee.firstName%>"  />
+                  </div>
+                  <div class="field">
+                      <label for="lastname">Last Name</label>
+                      <input type="text" name="lastname" id="lastname" value="<%=employee.lastName%>" />
+                  </div>
+                  <div class="field">
+                      <label for="payrate">Pay Rate</label>
+                      <input type="text" name="payrate" id="payrate" class="smallerbox" value="<%=employee.payRate%>" />
+                      <% if(employee.typeOfPay === 'hourly') { %>
+                      <input type="radio" id="hourly" name="typeofpay" value="hourly" checked/>
+                      <label for="hourly">Hourly</label>
+                      <input type="radio" id="salary" name="typeofpay" value="salary"/>
+                      <label for="salary">Salary</label>
+                      <%}else{%>
+                      <input type="radio" id="hourly" name="typeofpay" value="hourly" />
+                      <label for="hourly">Hourly</label>
+                      <input type="radio" id="salary" name="typeofpay" value="salary" checked/>
+                      <label for="salary">Salary</label>
+                      <% } %>
+                  </div>
+                  <div class="field">
+                    <label for="position">Position</label>
+                   <% if(employee.position === 'admin') { %>
+                    <select name="position" id="position">
+                      <option value="admin" selected>Admin</option>
+                      <option value="districtmanager">District Manager</option>
+                      <option value="generalmanager">General Manager</option>
+                      <option value="manager">Manager</option>                                        
+                      <option value="crew">Crew</option>
+                    </select>
+                    <% } %>
+                    <% if(employee.position === 'districtmanager') { %>
+                        <select name="position" id="position">
+                          <option value="admin">Admin</option>
+                          <option value="districtmanager" selected>District Manager</option>
+                          <option value="generalmanager">General Manager</option>
+                          <option value="manager">Manager</option>                                        
+                          <option value="crew">Crew</option>
+                        </select>
+                    <% } %>
+                    <% if(employee.position === 'generalmanager') { %>
+                        <select name="position" id="position">
+                          <option value="admin">Admin</option>
+                          <option value="districtmanager">District Manager</option>
+                          <option value="generalmanager" selected>General Manager</option>
+                          <option value="manager">Manager</option>                                        
+                          <option value="crew">Crew</option>
+                        </select>
+                    <% } %>
+                    <% if(employee.position === 'manager') { %>
+                        <select name="position" id="position">
+                          <option value="admin">Admin</option>
+                          <option value="districtmanager">District Manager</option>
+                          <option value="generalmanager">General Manager</option>
+                          <option value="manager" selected>Manager</option>                                        
+                          <option value="crew">Crew</option>
+                        </select>
+                    <% } %>
+                    <% if(employee.position === 'crew') { %>
+                        <select name="position" id="position">
+                          <option value="admin">Admin</option>
+                          <option value="districtmanager">District Manager</option>
+                          <option value="generalmanager">General Manager</option>
+                          <option value="manager">Manager</option>                                        
+                          <option value="crew" selected>Crew</option>
+                        </select>
+                    <% } %>
+                    <div class="field">
+                      <label for="location">Location</label>
+                      <select name="location" id="location">
+                        <% for(let i = 0; i<locations.length; i++) { %>
+                           <% if(employee.location === locations[i].locationName) { %>
+                          <option selected value="<%=`${locations[i].locationName}`%>"%>"><%=`${locations[i].locationNumber} - ${locations[i].locationName}` %></option>
+                          <%}else{%>
+                          <option value="<%=`${locations[i].locationName}`%>"%>"><%=`${locations[i].locationNumber} - ${locations[i].locationName}` %></option>
+                        <% }} %>   
+                      </select>                                       
+                     </div>                                      
+                  </div>
+                </div>
+                <ul class="actions">
+                    <li><input type="submit" value="Update" /></li>
+                </ul>    
+            </form>
+            <% } %>      
           </div>
         </section>
         <section id="two" class="wrapper alt spotlight style2">

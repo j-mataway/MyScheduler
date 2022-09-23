@@ -38,10 +38,10 @@ const UserSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  locationNumber:[{
-    type: Number,
+  location:{
+    type: String,
     required: true
-  }],
+  },
   createdAt: {
     type: Date,
     default: Date.now,
