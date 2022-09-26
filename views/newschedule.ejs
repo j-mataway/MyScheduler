@@ -15,7 +15,7 @@
       <!-- One -->
         <section id="one" class="wrapper spotlight style1">
             <div class="table-wrapper">
-            <form action="">
+            <form action="/schedules/createSchedule" method="post">
                 <label for="startdate" id="startdatelabel">Select Monday's Date</label>
                     <input type="date" name="startdate" id="startdate">
             <table>
@@ -56,12 +56,11 @@
                     <td>out</td>
                 </tr>
               </thead>
-                <!-- MANAGER TEMPLATE -->
               <tbody> 
                 <% for(let i=0; i<gm.length; i++){ %> 
                 <tr>
                     <td><%=`${gm[i].firstName}`%></td>
-                    <td><select name="mondayIn<%=`${gm[i]._id}`%>" id="mondayIn<%=`${gm[i]._id}`%>" class="schedule">
+                    <td><select name="mondayIn_<%=`${gm[i]._id}`%>" id="mondayIn_<%=`${gm[i]._id}`%>" class="schedule">
                         <option value = "off" selected>OFF</option>
                         <option value="1000am">10:00am</option>
                         <option value="1030am">10:30am</option>
@@ -89,7 +88,7 @@
                         <option value="930pm">9:30pm</option>
                         <option value="10pm">10:00pm</option>
                     </td>
-                    <td><select name="mondayOut<%=`${gm[i]._id}`%>" id="mondayOut<%=`${gm[i]._id}`%>" class="schedule">
+                    <td><select name="mondayOut_<%=`${gm[i]._id}`%>" id="mondayOut_<%=`${gm[i]._id}`%>" class="schedule">
                         <option value = "off" selected>OFF</option>
                         <option value="1000am">10:00am</option>
                         <option value="1030am">10:30am</option>
@@ -117,7 +116,7 @@
                         <option value="930pm">9:30pm</option>
                         <option value="10pm">10:00pm</option>
                     </td>
-                    <td><select name="tuesdayIn<%=`${gm[i]._id}`%>" id="tuesdayIn<%=`${gm[i]._id}`%>" class="schedule">
+                    <td><select name="tuesdayIn_<%=`${gm[i]._id}`%>" id="tuesdayIn_<%=`${gm[i]._id}`%>" class="schedule">
                         <option value = "off" selected>OFF</option>
                         <option value="1000am">10:00am</option>
                         <option value="1030am">10:30am</option>
@@ -145,7 +144,7 @@
                         <option value="930pm">9:30pm</option>
                         <option value="10pm">10:00pm</option>
                     </td>
-                    <td><select name="tuesdayout<%=`${gm[i]._id}`%>" id="tuesdayout<%=`${gm[i]._id}`%>" class="schedule">
+                    <td><select name="tuesdayout_<%=`${gm[i]._id}`%>" id="tuesdayout_<%=`${gm[i]._id}`%>" class="schedule">
                         <option value = "off" selected>OFF</option>
                         <option value="1000am">10:00am</option>
                         <option value="1030am">10:30am</option>
@@ -173,7 +172,7 @@
                         <option value="930pm">9:30pm</option>
                         <option value="10pm">10:00pm</option>
                     </td>
-                    <td><select name="wednesdayIn<%=`${gm[i]._id}`%>" id="wednesdayIn<%=`${gm[i]._id}`%>" class="schedule">
+                    <td><select name="wednesdayIn_<%=`${gm[i]._id}`%>" id="wednesdayIn_<%=`${gm[i]._id}`%>" class="schedule">
                         <option value = "off" selected>OFF</option>
                         <option value="1000am">10:00am</option>
                         <option value="1030am">10:30am</option>
@@ -201,7 +200,7 @@
                         <option value="930pm">9:30pm</option>
                         <option value="10pm">10:00pm</option>
                     </td>
-                    <td><select name="wednesdayOut<%=`${gm[i]._id}`%>" id="wednesdayOut<%=`${gm[i]._id}`%>" class="schedule">
+                    <td><select name="wednesdayOut_<%=`${gm[i]._id}`%>" id="wednesdayOut_<%=`${gm[i]._id}`%>" class="schedule">
                         <option value = "off" selected>OFF</option>
                         <option value="1000am">10:00am</option>
                         <option value="1030am">10:30am</option>
@@ -229,7 +228,7 @@
                         <option value="930pm">9:30pm</option>
                         <option value="10pm">10:00pm</option>
                     </td>
-                    <td><select name="thursdayIn<%=`${gm[i]._id}`%>" id="thursdayIn<%=`${gm[i]._id}`%>" class="schedule">
+                    <td><select name="thursdayIn_<%=`${gm[i]._id}`%>" id="thursdayIn_<%=`${gm[i]._id}`%>" class="schedule">
                         <option value = "off" selected>OFF</option>
                         <option value="1000am">10:00am</option>
                         <option value="1030am">10:30am</option>
@@ -257,7 +256,7 @@
                         <option value="930pm">9:30pm</option>
                         <option value="10pm">10:00pm</option>
                     </td>
-                    <td><select name="thursdayOut<%=`${gm[i]._id}`%>" id="thursdayOut<%=`${gm[i]._id}`%>" class="schedule">
+                    <td><select name="thursdayOut_<%=`${gm[i]._id}`%>" id="thursdayOut_<%=`${gm[i]._id}`%>" class="schedule">
                         <option value = "off" selected>OFF</option>
                         <option value="1000am">10:00am</option>
                         <option value="1030am">10:30am</option>
@@ -285,7 +284,7 @@
                         <option value="930pm">9:30pm</option>
                         <option value="10pm">10:00pm</option>
                     </td>
-                    <td><select name="fridayIn<%=`${gm[i]._id}`%>" id="fridayIn<%=`${gm[i]._id}`%>" class="schedule">
+                    <td><select name="fridayIn_<%=`${gm[i]._id}`%>" id="fridayIn_<%=`${gm[i]._id}`%>" class="schedule">
                         <option value = "off" selected>OFF</option>
                         <option value="1000am">10:00am</option>
                         <option value="1030am">10:30am</option>
@@ -313,7 +312,7 @@
                         <option value="930pm">9:30pm</option>
                         <option value="10pm">10:00pm</option>
                     </td>       
-                    <td><select name="fridayOut<%=`${gm[i]._id}`%>" id="fridayOut<%=`${gm[i]._id}`%>" class="schedule">
+                    <td><select name="fridayOut_<%=`${gm[i]._id}`%>" id="fridayOut_<%=`${gm[i]._id}`%>" class="schedule">
                         <option value = "off" selected>OFF</option>
                         <option value="1000am">10:00am</option>
                         <option value="1030am">10:30am</option>
@@ -341,7 +340,7 @@
                         <option value="930pm">9:30pm</option>
                         <option value="10pm">10:00pm</option>
                     </td>
-                    <td><select name="saturdayIn<%=`${gm[i]._id}`%>" id="saturdayIn<%=`${gm[i]._id}`%>" class="schedule">
+                    <td><select name="saturdayIn_<%=`${gm[i]._id}`%>" id="saturdayIn_<%=`${gm[i]._id}`%>" class="schedule">
                         <option value = "off" selected>OFF</option>
                         <option value="1000am">10:00am</option>
                         <option value="1030am">10:30am</option>
@@ -369,7 +368,7 @@
                         <option value="930pm">9:30pm</option>
                         <option value="10pm">10:00pm</option>
                     </td>
-                    <td><select name="saturdayOut<%=`${gm[i]._id}`%>" id="saturdayOut<%=`${gm[i]._id}`%>" class="schedule">
+                    <td><select name="saturdayOut_<%=`${gm[i]._id}`%>" id="saturdayOut_<%=`${gm[i]._id}`%>" class="schedule">
                         <option value = "off" selected>OFF</option>
                         <option value="1000am">10:00am</option>
                         <option value="1030am">10:30am</option>
@@ -397,7 +396,7 @@
                         <option value="930pm">9:30pm</option>
                         <option value="10pm">10:00pm</option>
                     </td>
-                    <td><select name="sundayIn<%=`${gm[i]._id}`%>" id="sundayIn<%=`${gm[i]._id}`%>" class="schedule">
+                    <td><select name="sundayIn_<%=`${gm[i]._id}`%>" id="sundayIn_<%=`${gm[i]._id}`%>" class="schedule">
                         <option value = "off" selected>OFF</option>
                         <option value="1000am">10:00am</option>
                         <option value="1030am">10:30am</option>
@@ -425,7 +424,7 @@
                         <option value="930pm">9:30pm</option>
                         <option value="10pm">10:00pm</option>
                     </td>
-                    <td><select name="sundayout<%=`${gm[i]._id}`%>" id="sundayout<%=`${gm[i]._id}`%>" class="schedule">
+                    <td><select name="sundayOut_<%=`${gm[i]._id}`%>" id="sundayOut_<%=`${gm[i]._id}`%>" class="schedule">
                         <option value = "off" selected>OFF</option>
                         <option value="1000am">10:00am</option>
                         <option value="1030am">10:30am</option>
@@ -453,8 +452,405 @@
                         <option value="930pm">9:30pm</option>
                         <option value="10pm">10:00pm</option>
                     </td>                                   
-                </tr> -->    
+                </tr>   
                 <% } %>
+                <% for(let i=0; i<managers.length; i++){ %> 
+                    <tr>
+                        <td><%=`${managers[i].firstName}`%></td>
+                        <td><select name="mondayIn_<%=`${managers[i]._id}`%>" id="mondayIn_<%=`${managers[i]._id}`%>" class="schedule">
+                            <option value = "off" selected>OFF</option>
+                            <option value="1000am">10:00am</option>
+                            <option value="1030am">10:30am</option>
+                            <option value="1100am">11:00am</option>
+                            <option value="1130am">11:30am</option>
+                            <option value="1200pm">12:00pm</option>
+                            <option value="1230pm">12:30pm</option>
+                            <option value="100pm">1:00pm</option>
+                            <option value="130pm">1:30pm</option>
+                            <option value="200pm">2:00pm</option>
+                            <option value="230pm">2:30pm</option>
+                            <option value="300pm">3:00pm</option>
+                            <option value="330pm">3:30pm</option>
+                            <option value="400pm">4:00pm</option>
+                            <option value="430pm">4:30pm</option>
+                            <option value="500pm">5:00pm</option>
+                            <option value="530pm">5:30pm</option>
+                            <option value="600pm">6:00pm</option>
+                            <option value="630pm">6:30pm</option>
+                            <option value="700pm">7:00pm</option>
+                            <option value="730pm">7:30pm</option>
+                            <option value="800pm">8:00pm</option>
+                            <option value="830pm">8:30pm</option>
+                            <option value="900pm">9:00pm</option>
+                            <option value="930pm">9:30pm</option>
+                            <option value="10pm">10:00pm</option>
+                        </td>
+                        <td><select name="mondayOut_<%=`${managers[i]._id}`%>" id="mondayOut_<%=`${managers[i]._id}`%>" class="schedule">
+                            <option value = "off" selected>OFF</option>
+                            <option value="1000am">10:00am</option>
+                            <option value="1030am">10:30am</option>
+                            <option value="1100am">11:00am</option>
+                            <option value="1130am">11:30am</option>
+                            <option value="1200pm">12:00pm</option>
+                            <option value="1230pm">12:30pm</option>
+                            <option value="100pm">1:00pm</option>
+                            <option value="130pm">1:30pm</option>
+                            <option value="200pm">2:00pm</option>
+                            <option value="230pm">2:30pm</option>
+                            <option value="300pm">3:00pm</option>
+                            <option value="330pm">3:30pm</option>
+                            <option value="400pm">4:00pm</option>
+                            <option value="430pm">4:30pm</option>
+                            <option value="500pm">5:00pm</option>
+                            <option value="530pm">5:30pm</option>
+                            <option value="600pm">6:00pm</option>
+                            <option value="630pm">6:30pm</option>
+                            <option value="700pm">7:00pm</option>
+                            <option value="730pm">7:30pm</option>
+                            <option value="800pm">8:00pm</option>
+                            <option value="830pm">8:30pm</option>
+                            <option value="900pm">9:00pm</option>
+                            <option value="930pm">9:30pm</option>
+                            <option value="10pm">10:00pm</option>
+                        </td>
+                        <td><select name="tuesdayIn_<%=`${managers[i]._id}`%>" id="tuesdayIn_<%=`${managers[i]._id}`%>" class="schedule">
+                            <option value = "off" selected>OFF</option>
+                            <option value="1000am">10:00am</option>
+                            <option value="1030am">10:30am</option>
+                            <option value="1100am">11:00am</option>
+                            <option value="1130am">11:30am</option>
+                            <option value="1200pm">12:00pm</option>
+                            <option value="1230pm">12:30pm</option>
+                            <option value="100pm">1:00pm</option>
+                            <option value="130pm">1:30pm</option>
+                            <option value="200pm">2:00pm</option>
+                            <option value="230pm">2:30pm</option>
+                            <option value="300pm">3:00pm</option>
+                            <option value="330pm">3:30pm</option>
+                            <option value="400pm">4:00pm</option>
+                            <option value="430pm">4:30pm</option>
+                            <option value="500pm">5:00pm</option>
+                            <option value="530pm">5:30pm</option>
+                            <option value="600pm">6:00pm</option>
+                            <option value="630pm">6:30pm</option>
+                            <option value="700pm">7:00pm</option>
+                            <option value="730pm">7:30pm</option>
+                            <option value="800pm">8:00pm</option>
+                            <option value="830pm">8:30pm</option>
+                            <option value="900pm">9:00pm</option>
+                            <option value="930pm">9:30pm</option>
+                            <option value="10pm">10:00pm</option>
+                        </td>
+                        <td><select name="tuesdayout_<%=`${managers[i]._id}`%>" id="tuesdayout_<%=`${managers[i]._id}`%>" class="schedule">
+                            <option value = "off" selected>OFF</option>
+                            <option value="1000am">10:00am</option>
+                            <option value="1030am">10:30am</option>
+                            <option value="1100am">11:00am</option>
+                            <option value="1130am">11:30am</option>
+                            <option value="1200pm">12:00pm</option>
+                            <option value="1230pm">12:30pm</option>
+                            <option value="100pm">1:00pm</option>
+                            <option value="130pm">1:30pm</option>
+                            <option value="200pm">2:00pm</option>
+                            <option value="230pm">2:30pm</option>
+                            <option value="300pm">3:00pm</option>
+                            <option value="330pm">3:30pm</option>
+                            <option value="400pm">4:00pm</option>
+                            <option value="430pm">4:30pm</option>
+                            <option value="500pm">5:00pm</option>
+                            <option value="530pm">5:30pm</option>
+                            <option value="600pm">6:00pm</option>
+                            <option value="630pm">6:30pm</option>
+                            <option value="700pm">7:00pm</option>
+                            <option value="730pm">7:30pm</option>
+                            <option value="800pm">8:00pm</option>
+                            <option value="830pm">8:30pm</option>
+                            <option value="900pm">9:00pm</option>
+                            <option value="930pm">9:30pm</option>
+                            <option value="10pm">10:00pm</option>
+                        </td>
+                        <td><select name="wednesdayIn_<%=`${managers[i]._id}`%>" id="wednesdayIn_<%=`${managers[i]._id}`%>" class="schedule">
+                            <option value = "off" selected>OFF</option>
+                            <option value="1000am">10:00am</option>
+                            <option value="1030am">10:30am</option>
+                            <option value="1100am">11:00am</option>
+                            <option value="1130am">11:30am</option>
+                            <option value="1200pm">12:00pm</option>
+                            <option value="1230pm">12:30pm</option>
+                            <option value="100pm">1:00pm</option>
+                            <option value="130pm">1:30pm</option>
+                            <option value="200pm">2:00pm</option>
+                            <option value="230pm">2:30pm</option>
+                            <option value="300pm">3:00pm</option>
+                            <option value="330pm">3:30pm</option>
+                            <option value="400pm">4:00pm</option>
+                            <option value="430pm">4:30pm</option>
+                            <option value="500pm">5:00pm</option>
+                            <option value="530pm">5:30pm</option>
+                            <option value="600pm">6:00pm</option>
+                            <option value="630pm">6:30pm</option>
+                            <option value="700pm">7:00pm</option>
+                            <option value="730pm">7:30pm</option>
+                            <option value="800pm">8:00pm</option>
+                            <option value="830pm">8:30pm</option>
+                            <option value="900pm">9:00pm</option>
+                            <option value="930pm">9:30pm</option>
+                            <option value="10pm">10:00pm</option>
+                        </td>
+                        <td><select name="wednesdayOut_<%=`${managers[i]._id}`%>" id="wednesdayOut_<%=`${managers[i]._id}`%>" class="schedule">
+                            <option value = "off" selected>OFF</option>
+                            <option value="1000am">10:00am</option>
+                            <option value="1030am">10:30am</option>
+                            <option value="1100am">11:00am</option>
+                            <option value="1130am">11:30am</option>
+                            <option value="1200pm">12:00pm</option>
+                            <option value="1230pm">12:30pm</option>
+                            <option value="100pm">1:00pm</option>
+                            <option value="130pm">1:30pm</option>
+                            <option value="200pm">2:00pm</option>
+                            <option value="230pm">2:30pm</option>
+                            <option value="300pm">3:00pm</option>
+                            <option value="330pm">3:30pm</option>
+                            <option value="400pm">4:00pm</option>
+                            <option value="430pm">4:30pm</option>
+                            <option value="500pm">5:00pm</option>
+                            <option value="530pm">5:30pm</option>
+                            <option value="600pm">6:00pm</option>
+                            <option value="630pm">6:30pm</option>
+                            <option value="700pm">7:00pm</option>
+                            <option value="730pm">7:30pm</option>
+                            <option value="800pm">8:00pm</option>
+                            <option value="830pm">8:30pm</option>
+                            <option value="900pm">9:00pm</option>
+                            <option value="930pm">9:30pm</option>
+                            <option value="10pm">10:00pm</option>
+                        </td>
+                        <td><select name="thursdayIn_<%=`${managers[i]._id}`%>" id="thursdayIn_<%=`${managers[i]._id}`%>" class="schedule">
+                            <option value = "off" selected>OFF</option>
+                            <option value="1000am">10:00am</option>
+                            <option value="1030am">10:30am</option>
+                            <option value="1100am">11:00am</option>
+                            <option value="1130am">11:30am</option>
+                            <option value="1200pm">12:00pm</option>
+                            <option value="1230pm">12:30pm</option>
+                            <option value="100pm">1:00pm</option>
+                            <option value="130pm">1:30pm</option>
+                            <option value="200pm">2:00pm</option>
+                            <option value="230pm">2:30pm</option>
+                            <option value="300pm">3:00pm</option>
+                            <option value="330pm">3:30pm</option>
+                            <option value="400pm">4:00pm</option>
+                            <option value="430pm">4:30pm</option>
+                            <option value="500pm">5:00pm</option>
+                            <option value="530pm">5:30pm</option>
+                            <option value="600pm">6:00pm</option>
+                            <option value="630pm">6:30pm</option>
+                            <option value="700pm">7:00pm</option>
+                            <option value="730pm">7:30pm</option>
+                            <option value="800pm">8:00pm</option>
+                            <option value="830pm">8:30pm</option>
+                            <option value="900pm">9:00pm</option>
+                            <option value="930pm">9:30pm</option>
+                            <option value="10pm">10:00pm</option>
+                        </td>
+                        <td><select name="thursdayOut_<%=`${managers[i]._id}`%>" id="thursdayOut_<%=`${managers[i]._id}`%>" class="schedule">
+                            <option value = "off" selected>OFF</option>
+                            <option value="1000am">10:00am</option>
+                            <option value="1030am">10:30am</option>
+                            <option value="1100am">11:00am</option>
+                            <option value="1130am">11:30am</option>
+                            <option value="1200pm">12:00pm</option>
+                            <option value="1230pm">12:30pm</option>
+                            <option value="100pm">1:00pm</option>
+                            <option value="130pm">1:30pm</option>
+                            <option value="200pm">2:00pm</option>
+                            <option value="230pm">2:30pm</option>
+                            <option value="300pm">3:00pm</option>
+                            <option value="330pm">3:30pm</option>
+                            <option value="400pm">4:00pm</option>
+                            <option value="430pm">4:30pm</option>
+                            <option value="500pm">5:00pm</option>
+                            <option value="530pm">5:30pm</option>
+                            <option value="600pm">6:00pm</option>
+                            <option value="630pm">6:30pm</option>
+                            <option value="700pm">7:00pm</option>
+                            <option value="730pm">7:30pm</option>
+                            <option value="800pm">8:00pm</option>
+                            <option value="830pm">8:30pm</option>
+                            <option value="900pm">9:00pm</option>
+                            <option value="930pm">9:30pm</option>
+                            <option value="10pm">10:00pm</option>
+                        </td>
+                        <td><select name="fridayIn_<%=`${managers[i]._id}`%>" id="fridayIn_<%=`${managers[i]._id}`%>" class="schedule">
+                            <option value = "off" selected>OFF</option>
+                            <option value="1000am">10:00am</option>
+                            <option value="1030am">10:30am</option>
+                            <option value="1100am">11:00am</option>
+                            <option value="1130am">11:30am</option>
+                            <option value="1200pm">12:00pm</option>
+                            <option value="1230pm">12:30pm</option>
+                            <option value="100pm">1:00pm</option>
+                            <option value="130pm">1:30pm</option>
+                            <option value="200pm">2:00pm</option>
+                            <option value="230pm">2:30pm</option>
+                            <option value="300pm">3:00pm</option>
+                            <option value="330pm">3:30pm</option>
+                            <option value="400pm">4:00pm</option>
+                            <option value="430pm">4:30pm</option>
+                            <option value="500pm">5:00pm</option>
+                            <option value="530pm">5:30pm</option>
+                            <option value="600pm">6:00pm</option>
+                            <option value="630pm">6:30pm</option>
+                            <option value="700pm">7:00pm</option>
+                            <option value="730pm">7:30pm</option>
+                            <option value="800pm">8:00pm</option>
+                            <option value="830pm">8:30pm</option>
+                            <option value="900pm">9:00pm</option>
+                            <option value="930pm">9:30pm</option>
+                            <option value="10pm">10:00pm</option>
+                        </td>       
+                        <td><select name="fridayOut_<%=`${managers[i]._id}`%>" id="fridayOut_<%=`${managers[i]._id}`%>" class="schedule">
+                            <option value = "off" selected>OFF</option>
+                            <option value="1000am">10:00am</option>
+                            <option value="1030am">10:30am</option>
+                            <option value="1100am">11:00am</option>
+                            <option value="1130am">11:30am</option>
+                            <option value="1200pm">12:00pm</option>
+                            <option value="1230pm">12:30pm</option>
+                            <option value="100pm">1:00pm</option>
+                            <option value="130pm">1:30pm</option>
+                            <option value="200pm">2:00pm</option>
+                            <option value="230pm">2:30pm</option>
+                            <option value="300pm">3:00pm</option>
+                            <option value="330pm">3:30pm</option>
+                            <option value="400pm">4:00pm</option>
+                            <option value="430pm">4:30pm</option>
+                            <option value="500pm">5:00pm</option>
+                            <option value="530pm">5:30pm</option>
+                            <option value="600pm">6:00pm</option>
+                            <option value="630pm">6:30pm</option>
+                            <option value="700pm">7:00pm</option>
+                            <option value="730pm">7:30pm</option>
+                            <option value="800pm">8:00pm</option>
+                            <option value="830pm">8:30pm</option>
+                            <option value="900pm">9:00pm</option>
+                            <option value="930pm">9:30pm</option>
+                            <option value="10pm">10:00pm</option>
+                        </td>
+                        <td><select name="saturdayIn_<%=`${managers[i]._id}`%>" id="saturdayIn_<%=`${managers[i]._id}`%>" class="schedule">
+                            <option value = "off" selected>OFF</option>
+                            <option value="1000am">10:00am</option>
+                            <option value="1030am">10:30am</option>
+                            <option value="1100am">11:00am</option>
+                            <option value="1130am">11:30am</option>
+                            <option value="1200pm">12:00pm</option>
+                            <option value="1230pm">12:30pm</option>
+                            <option value="100pm">1:00pm</option>
+                            <option value="130pm">1:30pm</option>
+                            <option value="200pm">2:00pm</option>
+                            <option value="230pm">2:30pm</option>
+                            <option value="300pm">3:00pm</option>
+                            <option value="330pm">3:30pm</option>
+                            <option value="400pm">4:00pm</option>
+                            <option value="430pm">4:30pm</option>
+                            <option value="500pm">5:00pm</option>
+                            <option value="530pm">5:30pm</option>
+                            <option value="600pm">6:00pm</option>
+                            <option value="630pm">6:30pm</option>
+                            <option value="700pm">7:00pm</option>
+                            <option value="730pm">7:30pm</option>
+                            <option value="800pm">8:00pm</option>
+                            <option value="830pm">8:30pm</option>
+                            <option value="900pm">9:00pm</option>
+                            <option value="930pm">9:30pm</option>
+                            <option value="10pm">10:00pm</option>
+                        </td>
+                        <td><select name="saturdayOut_<%=`${managers[i]._id}`%>" id="saturdayOut_<%=`${managers[i]._id}`%>" class="schedule">
+                            <option value = "off" selected>OFF</option>
+                            <option value="1000am">10:00am</option>
+                            <option value="1030am">10:30am</option>
+                            <option value="1100am">11:00am</option>
+                            <option value="1130am">11:30am</option>
+                            <option value="1200pm">12:00pm</option>
+                            <option value="1230pm">12:30pm</option>
+                            <option value="100pm">1:00pm</option>
+                            <option value="130pm">1:30pm</option>
+                            <option value="200pm">2:00pm</option>
+                            <option value="230pm">2:30pm</option>
+                            <option value="300pm">3:00pm</option>
+                            <option value="330pm">3:30pm</option>
+                            <option value="400pm">4:00pm</option>
+                            <option value="430pm">4:30pm</option>
+                            <option value="500pm">5:00pm</option>
+                            <option value="530pm">5:30pm</option>
+                            <option value="600pm">6:00pm</option>
+                            <option value="630pm">6:30pm</option>
+                            <option value="700pm">7:00pm</option>
+                            <option value="730pm">7:30pm</option>
+                            <option value="800pm">8:00pm</option>
+                            <option value="830pm">8:30pm</option>
+                            <option value="900pm">9:00pm</option>
+                            <option value="930pm">9:30pm</option>
+                            <option value="10pm">10:00pm</option>
+                        </td>
+                        <td><select name="sundayIn_<%=`${managers[i]._id}`%>" id="sundayIn_<%=`${managers[i]._id}`%>" class="schedule">
+                            <option value = "off" selected>OFF</option>
+                            <option value="1000am">10:00am</option>
+                            <option value="1030am">10:30am</option>
+                            <option value="1100am">11:00am</option>
+                            <option value="1130am">11:30am</option>
+                            <option value="1200pm">12:00pm</option>
+                            <option value="1230pm">12:30pm</option>
+                            <option value="100pm">1:00pm</option>
+                            <option value="130pm">1:30pm</option>
+                            <option value="200pm">2:00pm</option>
+                            <option value="230pm">2:30pm</option>
+                            <option value="300pm">3:00pm</option>
+                            <option value="330pm">3:30pm</option>
+                            <option value="400pm">4:00pm</option>
+                            <option value="430pm">4:30pm</option>
+                            <option value="500pm">5:00pm</option>
+                            <option value="530pm">5:30pm</option>
+                            <option value="600pm">6:00pm</option>
+                            <option value="630pm">6:30pm</option>
+                            <option value="700pm">7:00pm</option>
+                            <option value="730pm">7:30pm</option>
+                            <option value="800pm">8:00pm</option>
+                            <option value="830pm">8:30pm</option>
+                            <option value="900pm">9:00pm</option>
+                            <option value="930pm">9:30pm</option>
+                            <option value="10pm">10:00pm</option>
+                        </td>
+                        <td><select name="sundayOut_<%=`${managers[i]._id}`%>" id="sundayOut_<%=`${managers[i]._id}`%>" class="schedule">
+                            <option value = "off" selected>OFF</option>
+                            <option value="1000am">10:00am</option>
+                            <option value="1030am">10:30am</option>
+                            <option value="1100am">11:00am</option>
+                            <option value="1130am">11:30am</option>
+                            <option value="1200pm">12:00pm</option>
+                            <option value="1230pm">12:30pm</option>
+                            <option value="100pm">1:00pm</option>
+                            <option value="130pm">1:30pm</option>
+                            <option value="200pm">2:00pm</option>
+                            <option value="230pm">2:30pm</option>
+                            <option value="300pm">3:00pm</option>
+                            <option value="330pm">3:30pm</option>
+                            <option value="400pm">4:00pm</option>
+                            <option value="430pm">4:30pm</option>
+                            <option value="500pm">5:00pm</option>
+                            <option value="530pm">5:30pm</option>
+                            <option value="600pm">6:00pm</option>
+                            <option value="630pm">6:30pm</option>
+                            <option value="700pm">7:00pm</option>
+                            <option value="730pm">7:30pm</option>
+                            <option value="800pm">8:00pm</option>
+                            <option value="830pm">8:30pm</option>
+                            <option value="900pm">9:00pm</option>
+                            <option value="930pm">9:30pm</option>
+                            <option value="10pm">10:00pm</option>
+                        </td>                                   
+                    </tr> 
+                    <% } %>
                 <tr>
                     <td>Crew</td>
                     <td>In</td>
@@ -473,25 +869,408 @@
                     <td>out</td>
                 </tr>
                 <!-- CREW TEMPLATE -->
+                <% for(let i=0; i<crew.length; i++){ %> 
+                    <tr>
+                        <td><%=`${crew[i].firstName}`%></td>
+                        <td><select name="mondayIn_<%=`${crew[i]._id}`%>" id="mondayIn_<%=`${crew[i]._id}`%>" class="schedule">
+                            <option value = "off" selected>OFF</option>
+                            <option value="1000am">10:00am</option>
+                            <option value="1030am">10:30am</option>
+                            <option value="1100am">11:00am</option>
+                            <option value="1130am">11:30am</option>
+                            <option value="1200pm">12:00pm</option>
+                            <option value="1230pm">12:30pm</option>
+                            <option value="100pm">1:00pm</option>
+                            <option value="130pm">1:30pm</option>
+                            <option value="200pm">2:00pm</option>
+                            <option value="230pm">2:30pm</option>
+                            <option value="300pm">3:00pm</option>
+                            <option value="330pm">3:30pm</option>
+                            <option value="400pm">4:00pm</option>
+                            <option value="430pm">4:30pm</option>
+                            <option value="500pm">5:00pm</option>
+                            <option value="530pm">5:30pm</option>
+                            <option value="600pm">6:00pm</option>
+                            <option value="630pm">6:30pm</option>
+                            <option value="700pm">7:00pm</option>
+                            <option value="730pm">7:30pm</option>
+                            <option value="800pm">8:00pm</option>
+                            <option value="830pm">8:30pm</option>
+                            <option value="900pm">9:00pm</option>
+                            <option value="930pm">9:30pm</option>
+                            <option value="10pm">10:00pm</option>
+                        </td>
+                        <td><select name="mondayOut_<%=`${crew[i]._id}`%>" id="mondayOut_<%=`${crew[i]._id}`%>" class="schedule">
+                            <option value = "off" selected>OFF</option>
+                            <option value="1000am">10:00am</option>
+                            <option value="1030am">10:30am</option>
+                            <option value="1100am">11:00am</option>
+                            <option value="1130am">11:30am</option>
+                            <option value="1200pm">12:00pm</option>
+                            <option value="1230pm">12:30pm</option>
+                            <option value="100pm">1:00pm</option>
+                            <option value="130pm">1:30pm</option>
+                            <option value="200pm">2:00pm</option>
+                            <option value="230pm">2:30pm</option>
+                            <option value="300pm">3:00pm</option>
+                            <option value="330pm">3:30pm</option>
+                            <option value="400pm">4:00pm</option>
+                            <option value="430pm">4:30pm</option>
+                            <option value="500pm">5:00pm</option>
+                            <option value="530pm">5:30pm</option>
+                            <option value="600pm">6:00pm</option>
+                            <option value="630pm">6:30pm</option>
+                            <option value="700pm">7:00pm</option>
+                            <option value="730pm">7:30pm</option>
+                            <option value="800pm">8:00pm</option>
+                            <option value="830pm">8:30pm</option>
+                            <option value="900pm">9:00pm</option>
+                            <option value="930pm">9:30pm</option>
+                            <option value="10pm">10:00pm</option>
+                        </td>
+                        <td><select name="tuesdayIn_<%=`${crew[i]._id}`%>" id="tuesdayIn_<%=`${crew[i]._id}`%>" class="schedule">
+                            <option value = "off" selected>OFF</option>
+                            <option value="1000am">10:00am</option>
+                            <option value="1030am">10:30am</option>
+                            <option value="1100am">11:00am</option>
+                            <option value="1130am">11:30am</option>
+                            <option value="1200pm">12:00pm</option>
+                            <option value="1230pm">12:30pm</option>
+                            <option value="100pm">1:00pm</option>
+                            <option value="130pm">1:30pm</option>
+                            <option value="200pm">2:00pm</option>
+                            <option value="230pm">2:30pm</option>
+                            <option value="300pm">3:00pm</option>
+                            <option value="330pm">3:30pm</option>
+                            <option value="400pm">4:00pm</option>
+                            <option value="430pm">4:30pm</option>
+                            <option value="500pm">5:00pm</option>
+                            <option value="530pm">5:30pm</option>
+                            <option value="600pm">6:00pm</option>
+                            <option value="630pm">6:30pm</option>
+                            <option value="700pm">7:00pm</option>
+                            <option value="730pm">7:30pm</option>
+                            <option value="800pm">8:00pm</option>
+                            <option value="830pm">8:30pm</option>
+                            <option value="900pm">9:00pm</option>
+                            <option value="930pm">9:30pm</option>
+                            <option value="10pm">10:00pm</option>
+                        </td>
+                        <td><select name="tuesdayout_<%=`${crew[i]._id}`%>" id="tuesdayout_<%=`${crew[i]._id}`%>" class="schedule">
+                            <option value = "off" selected>OFF</option>
+                            <option value="1000am">10:00am</option>
+                            <option value="1030am">10:30am</option>
+                            <option value="1100am">11:00am</option>
+                            <option value="1130am">11:30am</option>
+                            <option value="1200pm">12:00pm</option>
+                            <option value="1230pm">12:30pm</option>
+                            <option value="100pm">1:00pm</option>
+                            <option value="130pm">1:30pm</option>
+                            <option value="200pm">2:00pm</option>
+                            <option value="230pm">2:30pm</option>
+                            <option value="300pm">3:00pm</option>
+                            <option value="330pm">3:30pm</option>
+                            <option value="400pm">4:00pm</option>
+                            <option value="430pm">4:30pm</option>
+                            <option value="500pm">5:00pm</option>
+                            <option value="530pm">5:30pm</option>
+                            <option value="600pm">6:00pm</option>
+                            <option value="630pm">6:30pm</option>
+                            <option value="700pm">7:00pm</option>
+                            <option value="730pm">7:30pm</option>
+                            <option value="800pm">8:00pm</option>
+                            <option value="830pm">8:30pm</option>
+                            <option value="900pm">9:00pm</option>
+                            <option value="930pm">9:30pm</option>
+                            <option value="10pm">10:00pm</option>
+                        </td>
+                        <td><select name="wednesdayIn_<%=`${crew[i]._id}`%>" id="wednesdayIn_<%=`${crew[i]._id}`%>" class="schedule">
+                            <option value = "off" selected>OFF</option>
+                            <option value="1000am">10:00am</option>
+                            <option value="1030am">10:30am</option>
+                            <option value="1100am">11:00am</option>
+                            <option value="1130am">11:30am</option>
+                            <option value="1200pm">12:00pm</option>
+                            <option value="1230pm">12:30pm</option>
+                            <option value="100pm">1:00pm</option>
+                            <option value="130pm">1:30pm</option>
+                            <option value="200pm">2:00pm</option>
+                            <option value="230pm">2:30pm</option>
+                            <option value="300pm">3:00pm</option>
+                            <option value="330pm">3:30pm</option>
+                            <option value="400pm">4:00pm</option>
+                            <option value="430pm">4:30pm</option>
+                            <option value="500pm">5:00pm</option>
+                            <option value="530pm">5:30pm</option>
+                            <option value="600pm">6:00pm</option>
+                            <option value="630pm">6:30pm</option>
+                            <option value="700pm">7:00pm</option>
+                            <option value="730pm">7:30pm</option>
+                            <option value="800pm">8:00pm</option>
+                            <option value="830pm">8:30pm</option>
+                            <option value="900pm">9:00pm</option>
+                            <option value="930pm">9:30pm</option>
+                            <option value="10pm">10:00pm</option>
+                        </td>
+                        <td><select name="wednesdayOut_<%=`${crew[i]._id}`%>" id="wednesdayOut_<%=`${crew[i]._id}`%>" class="schedule">
+                            <option value = "off" selected>OFF</option>
+                            <option value="1000am">10:00am</option>
+                            <option value="1030am">10:30am</option>
+                            <option value="1100am">11:00am</option>
+                            <option value="1130am">11:30am</option>
+                            <option value="1200pm">12:00pm</option>
+                            <option value="1230pm">12:30pm</option>
+                            <option value="100pm">1:00pm</option>
+                            <option value="130pm">1:30pm</option>
+                            <option value="200pm">2:00pm</option>
+                            <option value="230pm">2:30pm</option>
+                            <option value="300pm">3:00pm</option>
+                            <option value="330pm">3:30pm</option>
+                            <option value="400pm">4:00pm</option>
+                            <option value="430pm">4:30pm</option>
+                            <option value="500pm">5:00pm</option>
+                            <option value="530pm">5:30pm</option>
+                            <option value="600pm">6:00pm</option>
+                            <option value="630pm">6:30pm</option>
+                            <option value="700pm">7:00pm</option>
+                            <option value="730pm">7:30pm</option>
+                            <option value="800pm">8:00pm</option>
+                            <option value="830pm">8:30pm</option>
+                            <option value="900pm">9:00pm</option>
+                            <option value="930pm">9:30pm</option>
+                            <option value="10pm">10:00pm</option>
+                        </td>
+                        <td><select name="thursdayIn_<%=`${crew[i]._id}`%>" id="thursdayIn_<%=`${crew[i]._id}`%>" class="schedule">
+                            <option value = "off" selected>OFF</option>
+                            <option value="1000am">10:00am</option>
+                            <option value="1030am">10:30am</option>
+                            <option value="1100am">11:00am</option>
+                            <option value="1130am">11:30am</option>
+                            <option value="1200pm">12:00pm</option>
+                            <option value="1230pm">12:30pm</option>
+                            <option value="100pm">1:00pm</option>
+                            <option value="130pm">1:30pm</option>
+                            <option value="200pm">2:00pm</option>
+                            <option value="230pm">2:30pm</option>
+                            <option value="300pm">3:00pm</option>
+                            <option value="330pm">3:30pm</option>
+                            <option value="400pm">4:00pm</option>
+                            <option value="430pm">4:30pm</option>
+                            <option value="500pm">5:00pm</option>
+                            <option value="530pm">5:30pm</option>
+                            <option value="600pm">6:00pm</option>
+                            <option value="630pm">6:30pm</option>
+                            <option value="700pm">7:00pm</option>
+                            <option value="730pm">7:30pm</option>
+                            <option value="800pm">8:00pm</option>
+                            <option value="830pm">8:30pm</option>
+                            <option value="900pm">9:00pm</option>
+                            <option value="930pm">9:30pm</option>
+                            <option value="10pm">10:00pm</option>
+                        </td>
+                        <td><select name="thursdayOut_<%=`${crew[i]._id}`%>" id="thursdayOut_<%=`${crew[i]._id}`%>" class="schedule">
+                            <option value = "off" selected>OFF</option>
+                            <option value="1000am">10:00am</option>
+                            <option value="1030am">10:30am</option>
+                            <option value="1100am">11:00am</option>
+                            <option value="1130am">11:30am</option>
+                            <option value="1200pm">12:00pm</option>
+                            <option value="1230pm">12:30pm</option>
+                            <option value="100pm">1:00pm</option>
+                            <option value="130pm">1:30pm</option>
+                            <option value="200pm">2:00pm</option>
+                            <option value="230pm">2:30pm</option>
+                            <option value="300pm">3:00pm</option>
+                            <option value="330pm">3:30pm</option>
+                            <option value="400pm">4:00pm</option>
+                            <option value="430pm">4:30pm</option>
+                            <option value="500pm">5:00pm</option>
+                            <option value="530pm">5:30pm</option>
+                            <option value="600pm">6:00pm</option>
+                            <option value="630pm">6:30pm</option>
+                            <option value="700pm">7:00pm</option>
+                            <option value="730pm">7:30pm</option>
+                            <option value="800pm">8:00pm</option>
+                            <option value="830pm">8:30pm</option>
+                            <option value="900pm">9:00pm</option>
+                            <option value="930pm">9:30pm</option>
+                            <option value="10pm">10:00pm</option>
+                        </td>
+                        <td><select name="fridayIn_<%=`${crew[i]._id}`%>" id="fridayIn_<%=`${crew[i]._id}`%>" class="schedule">
+                            <option value = "off" selected>OFF</option>
+                            <option value="1000am">10:00am</option>
+                            <option value="1030am">10:30am</option>
+                            <option value="1100am">11:00am</option>
+                            <option value="1130am">11:30am</option>
+                            <option value="1200pm">12:00pm</option>
+                            <option value="1230pm">12:30pm</option>
+                            <option value="100pm">1:00pm</option>
+                            <option value="130pm">1:30pm</option>
+                            <option value="200pm">2:00pm</option>
+                            <option value="230pm">2:30pm</option>
+                            <option value="300pm">3:00pm</option>
+                            <option value="330pm">3:30pm</option>
+                            <option value="400pm">4:00pm</option>
+                            <option value="430pm">4:30pm</option>
+                            <option value="500pm">5:00pm</option>
+                            <option value="530pm">5:30pm</option>
+                            <option value="600pm">6:00pm</option>
+                            <option value="630pm">6:30pm</option>
+                            <option value="700pm">7:00pm</option>
+                            <option value="730pm">7:30pm</option>
+                            <option value="800pm">8:00pm</option>
+                            <option value="830pm">8:30pm</option>
+                            <option value="900pm">9:00pm</option>
+                            <option value="930pm">9:30pm</option>
+                            <option value="10pm">10:00pm</option>
+                        </td>       
+                        <td><select name="fridayOut_<%=`${crew[i]._id}`%>" id="fridayOut_<%=`${crew[i]._id}`%>" class="schedule">
+                            <option value = "off" selected>OFF</option>
+                            <option value="1000am">10:00am</option>
+                            <option value="1030am">10:30am</option>
+                            <option value="1100am">11:00am</option>
+                            <option value="1130am">11:30am</option>
+                            <option value="1200pm">12:00pm</option>
+                            <option value="1230pm">12:30pm</option>
+                            <option value="100pm">1:00pm</option>
+                            <option value="130pm">1:30pm</option>
+                            <option value="200pm">2:00pm</option>
+                            <option value="230pm">2:30pm</option>
+                            <option value="300pm">3:00pm</option>
+                            <option value="330pm">3:30pm</option>
+                            <option value="400pm">4:00pm</option>
+                            <option value="430pm">4:30pm</option>
+                            <option value="500pm">5:00pm</option>
+                            <option value="530pm">5:30pm</option>
+                            <option value="600pm">6:00pm</option>
+                            <option value="630pm">6:30pm</option>
+                            <option value="700pm">7:00pm</option>
+                            <option value="730pm">7:30pm</option>
+                            <option value="800pm">8:00pm</option>
+                            <option value="830pm">8:30pm</option>
+                            <option value="900pm">9:00pm</option>
+                            <option value="930pm">9:30pm</option>
+                            <option value="10pm">10:00pm</option>
+                        </td>
+                        <td><select name="saturdayIn_<%=`${crew[i]._id}`%>" id="saturdayIn_<%=`${crew[i]._id}`%>" class="schedule">
+                            <option value = "off" selected>OFF</option>
+                            <option value="1000am">10:00am</option>
+                            <option value="1030am">10:30am</option>
+                            <option value="1100am">11:00am</option>
+                            <option value="1130am">11:30am</option>
+                            <option value="1200pm">12:00pm</option>
+                            <option value="1230pm">12:30pm</option>
+                            <option value="100pm">1:00pm</option>
+                            <option value="130pm">1:30pm</option>
+                            <option value="200pm">2:00pm</option>
+                            <option value="230pm">2:30pm</option>
+                            <option value="300pm">3:00pm</option>
+                            <option value="330pm">3:30pm</option>
+                            <option value="400pm">4:00pm</option>
+                            <option value="430pm">4:30pm</option>
+                            <option value="500pm">5:00pm</option>
+                            <option value="530pm">5:30pm</option>
+                            <option value="600pm">6:00pm</option>
+                            <option value="630pm">6:30pm</option>
+                            <option value="700pm">7:00pm</option>
+                            <option value="730pm">7:30pm</option>
+                            <option value="800pm">8:00pm</option>
+                            <option value="830pm">8:30pm</option>
+                            <option value="900pm">9:00pm</option>
+                            <option value="930pm">9:30pm</option>
+                            <option value="10pm">10:00pm</option>
+                        </td>
+                        <td><select name="saturdayOut_<%=`${crew[i]._id}`%>" id="saturdayOut_<%=`${crew[i]._id}`%>" class="schedule">
+                            <option value = "off" selected>OFF</option>
+                            <option value="1000am">10:00am</option>
+                            <option value="1030am">10:30am</option>
+                            <option value="1100am">11:00am</option>
+                            <option value="1130am">11:30am</option>
+                            <option value="1200pm">12:00pm</option>
+                            <option value="1230pm">12:30pm</option>
+                            <option value="100pm">1:00pm</option>
+                            <option value="130pm">1:30pm</option>
+                            <option value="200pm">2:00pm</option>
+                            <option value="230pm">2:30pm</option>
+                            <option value="300pm">3:00pm</option>
+                            <option value="330pm">3:30pm</option>
+                            <option value="400pm">4:00pm</option>
+                            <option value="430pm">4:30pm</option>
+                            <option value="500pm">5:00pm</option>
+                            <option value="530pm">5:30pm</option>
+                            <option value="600pm">6:00pm</option>
+                            <option value="630pm">6:30pm</option>
+                            <option value="700pm">7:00pm</option>
+                            <option value="730pm">7:30pm</option>
+                            <option value="800pm">8:00pm</option>
+                            <option value="830pm">8:30pm</option>
+                            <option value="900pm">9:00pm</option>
+                            <option value="930pm">9:30pm</option>
+                            <option value="10pm">10:00pm</option>
+                        </td>
+                        <td><select name="sundayIn_<%=`${crew[i]._id}`%>" id="sundayIn_<%=`${crew[i]._id}`%>" class="schedule">
+                            <option value = "off" selected>OFF</option>
+                            <option value="1000am">10:00am</option>
+                            <option value="1030am">10:30am</option>
+                            <option value="1100am">11:00am</option>
+                            <option value="1130am">11:30am</option>
+                            <option value="1200pm">12:00pm</option>
+                            <option value="1230pm">12:30pm</option>
+                            <option value="100pm">1:00pm</option>
+                            <option value="130pm">1:30pm</option>
+                            <option value="200pm">2:00pm</option>
+                            <option value="230pm">2:30pm</option>
+                            <option value="300pm">3:00pm</option>
+                            <option value="330pm">3:30pm</option>
+                            <option value="400pm">4:00pm</option>
+                            <option value="430pm">4:30pm</option>
+                            <option value="500pm">5:00pm</option>
+                            <option value="530pm">5:30pm</option>
+                            <option value="600pm">6:00pm</option>
+                            <option value="630pm">6:30pm</option>
+                            <option value="700pm">7:00pm</option>
+                            <option value="730pm">7:30pm</option>
+                            <option value="800pm">8:00pm</option>
+                            <option value="830pm">8:30pm</option>
+                            <option value="900pm">9:00pm</option>
+                            <option value="930pm">9:30pm</option>
+                            <option value="10pm">10:00pm</option>
+                        </td>
+                        <td><select name="sundayOut_<%=`${crew[i]._id}`%>" id="sundayOut_<%=`${crew[i]._id}`%>" class="schedule">
+                            <option value = "off" selected>OFF</option>
+                            <option value="1000am">10:00am</option>
+                            <option value="1030am">10:30am</option>
+                            <option value="1100am">11:00am</option>
+                            <option value="1130am">11:30am</option>
+                            <option value="1200pm">12:00pm</option>
+                            <option value="1230pm">12:30pm</option>
+                            <option value="100pm">1:00pm</option>
+                            <option value="130pm">1:30pm</option>
+                            <option value="200pm">2:00pm</option>
+                            <option value="230pm">2:30pm</option>
+                            <option value="300pm">3:00pm</option>
+                            <option value="330pm">3:30pm</option>
+                            <option value="400pm">4:00pm</option>
+                            <option value="430pm">4:30pm</option>
+                            <option value="500pm">5:00pm</option>
+                            <option value="530pm">5:30pm</option>
+                            <option value="600pm">6:00pm</option>
+                            <option value="630pm">6:30pm</option>
+                            <option value="700pm">7:00pm</option>
+                            <option value="730pm">7:30pm</option>
+                            <option value="800pm">8:00pm</option>
+                            <option value="830pm">8:30pm</option>
+                            <option value="900pm">9:00pm</option>
+                            <option value="930pm">9:30pm</option>
+                            <option value="10pm">10:00pm</option>
+                        </td>                                   
+                    </tr>
+                    <% } %>
                 <tr>
-                    <td>Jim</td>
-                    <td><select name="" id="" class="schedule"><option selected>OFF</option></td>
-                    <td><select name="" id="" class="schedule"><option selected>OFF</option></td>
-                    <td><select name="" id="" class="schedule"><option selected>OFF</option></td>
-                    <td><select name="" id="" class="schedule"><option selected>OFF</option></td>
-                    <td><select name="" id="" class="schedule"><option selected>OFF</option></td>
-                    <td><select name="" id="" class="schedule"><option selected>OFF</option></td>
-                    <td><select name="" id="" class="schedule"><option selected>OFF</option></td>
-                    <td><select name="" id="" class="schedule"><option selected>OFF</option></td>
-                    <td><select name="" id="" class="schedule"><option selected>OFF</option></td>       
-                    <td><select name="" id="" class="schedule"><option selected>OFF</option></td>
-                    <td><select name="" id="" class="schedule"><option selected>OFF</option></td>
-                    <td><select name="" id="" class="schedule"><option selected>OFF</option></td>
-                    <td><select name="" id="" class="schedule"><option selected>OFF</option></td>
-                    <td><select name="" id="" class="schedule"><option selected>OFF</option></td>                                   
-                </tr>
               </tbody>  
             </table>
+            <input type="checkbox" id="finalized" name="finalized" value="Finalized">
+            <label for="finalized">Finalized</label>
             <ul class="actions">
                 <li><input type="submit" value="Submit"/></li>
             </ul>
