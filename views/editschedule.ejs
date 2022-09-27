@@ -1,0 +1,46 @@
+<%- include('partials/header') -%>
+<!-- Page Wrapper -->
+<div id="page-wrapper">
+  <!-- Banner -->
+    <section id="banner">
+      <div class="inner">
+        <div class="logo"><img src="/images/logo.png" class="icon" alt=""></div>    
+        <h2>KJ Pizza - MySchedule</h2>
+      </div>
+    </section>
+
+  <!-- Wrapper -->
+    <section id="wrapper">
+
+      <!-- One -->
+        <section id="one" class="wrapper spotlight style1">
+          <div class="inner">
+            <h3>Edit Employee</h3>
+            <!-- <% if(existingScheduleError) { %> -->
+                <p class = "errorMessage">Schedule for that date already exists, select date to edit</p>
+             <!-- <% } %>    -->
+            <form action="/schedules/editSchedule" method="get">
+                <div class="features">
+                <label for="scheduleDate" >Select Schedule to edit</label>
+                <select name="scheduleDate" class="scheduleDate">
+                        <option value="none" selected disabled hidden> Select Date </option>
+                    <!-- <% for(let i = 0; i<scheduleDates.length; i++) { %>
+                        <option value="<%=`${locations[i].locationName}`%>"% name="location"><%=`${locations[i].locationName}` %></option>
+                    <% } %>    -->
+                    </select> 
+                <ul class="actions">
+                    <li><input type="submit" value="Submit"/></li>
+                </ul>
+            </form>
+            <% } %>    
+          </div>
+        </section>
+        <section id="two" class="wrapper alt spotlight style2">
+          <div class="inner">
+            <div class ="features">
+              <a href="/profile" class="button">Back</a>
+              <a href="/logout" class="button">Logout</a>
+            </div>  
+          </div>
+        </section>
+        <%- include('partials/footer') -%>

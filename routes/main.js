@@ -17,7 +17,8 @@ router.get("/createLocation", locationsController.getCreateLocation);
 router.get("/editUser", usersController.getEditUser)
 router.get("/editLocation", locationsController.getEditLocation)
 router.get("/newSchedule", schedulesController.getNewSchedule)
-
+router.get("/editSchedule", schedulesController.getEditSchedule)
+router.get("/viewSchedule", schedulesController.getViewSchedule)
 router.post("/login", authController.postLogin);
 router.post("/createUser", authController.postCreateUser);
 router.post("/createLocation", locationsController.postCreateLocation);

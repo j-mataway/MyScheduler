@@ -1,0 +1,87 @@
+<%- include('partials/header') -%>
+<!-- Page Wrapper -->
+<div id="page-wrapper">
+  <!-- Banner -->
+    <section id="banner">
+      <div class="inner">
+        <div class="logo"><img src="/images/logo.png" class="icon" alt=""></div>    
+        <h2>KJ Pizza - MySchedule</h2>
+      </div>
+    </section>
+
+  <!-- Wrapper -->
+    <section id="wrapper">
+
+      <!-- One -->
+        <section id="one" class="wrapper spotlight style1">
+          <div class="inner">
+            <% if (!schedule) { %>
+            <h3>View Schedule</h3>
+            <form method="get" action="/schedules/getSchedule">
+                <div class="features">
+                    <label for="schedule" >Select Schedule Date</label>
+                    <select name="schedule" class="schedule">
+                            <option value="none" selected disabled hidden> Select a Schedule Start Date </option>
+                        <% for(let i = 0; i<schedules.length; i++) { %>
+                            <option value="<%=`${scheduleDates[i]}`%>"% name="schedule"><%=`${scheduleDates[i]}` %></option>
+                        <% } %>   
+                        </select> 
+                <ul class="actions">
+                    <li><input type="submit" value="Submit" /></li>
+                </ul>
+            </form>
+            <% }else{ console.log(schedule.employeeSchedule.schedule)%>
+                <h3>View Schedule</h3>
+                <div class="features">
+                 <ul class="alt">
+                    <li>Schedule for week beginning <%=`${selectedDate}`%> for <%=`${user.firstName} ${user.lastName}`%></li>
+                    <% if (schedule.employeeSchedule.schedule.mondayIn === 'off') { %>
+                    <li>Monday - OFF</li>
+                    <%}else{%>     
+                    <li>Monday - <%=`${schedule.employeeSchedule.schedule.mondayIn} to ${schedule.employeeSchedule.schedule.mondayOut}`%></li> 
+                    <%}%>
+                    <% if (schedule.employeeSchedule.schedule.tuesdayIn === 'off') { %>
+                    <li>Tuesday - OFF</li>
+                    <%}else{%>     
+                    <li>Tuesday - <%=`${schedule.employeeSchedule.schedule.tuesdayIn} to ${schedule.employeeSchedule.schedule.tuesdayOut}`%></li> 
+                    <%}%>
+                    <% if (schedule.employeeSchedule.schedule.wednesdayIn === 'off') { %>
+                    <li>Wednesday - OFF</li>
+                    <%}else{%>     
+                    <li>Wednesday - <%=`${schedule.employeeSchedule.schedule.wednesdayIn} to ${schedule.employeeSchedule.schedule.wednesdayOut}`%></li> 
+                    <%}%>
+                    <% if (schedule.employeeSchedule.schedule.thursdayIn === 'off') { %>
+                    <li>Thursday - OFF</li>
+                    <%}else{%>     
+                    <li>Thursday - <%=`${schedule.employeeSchedule.schedule.thursdayIn} to ${schedule.employeeSchedule.schedule.thursdayOut}`%></li> 
+                    <%}%>
+                    <% if (schedule.employeeSchedule.schedule.fridayIn === 'off') { %>
+                    <li>Friday - OFF</li>
+                    <%}else{%>     
+                    <li>Friday - <%=`${schedule.employeeSchedule.schedule.fridayIn} to ${schedule.employeeSchedule.schedule.fridayOut}`%></li> 
+                    <%}%>
+                    <% if (schedule.employeeSchedule.schedule.saturdayIn === 'off') { %>
+                    <li>Saturday - OFF</li>
+                    <%}else{%>     
+                    <li>Saturday - <%=`${schedule.employeeSchedule.schedule.saturdayIn} to ${schedule.employeeSchedule.schedule.saturdayOut}`%></li> 
+                    <%}%>
+                    <% if (schedule.employeeSchedule.schedule.sundayIn === 'off') { %>
+                    <li>Sunday - OFF</li>
+                    <%}else{%>     
+                    <li>Sunday - <%=`${schedule.employeeSchedule.schedule.sundayIn} to ${schedule.employeeSchedule.schedule.sundayOut}`%></li> 
+                    <%}%>
+                 </ul>
+                </div>   
+            <% } %>
+        </div>
+        </section>
+        <section id="two" class="wrapper alt spotlight style2">
+          <div class="inner">
+            <div class ="features">
+              <a href="/profile" class="button">Back</a>
+              <a href="/logout" class="button">Logout</a>
+            </div>  
+          </div>
+        </section>
+    </section>
+        <%- include('partials/footer') -%>
