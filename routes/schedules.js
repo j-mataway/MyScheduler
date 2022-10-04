@@ -5,5 +5,6 @@ const { ensureAuth, ensureGuest } = require("../middleware/auth");
 
 router.post("/createSchedule", schedulesController.createNewSchedule)
 router.get("/getSchedule", schedulesController.getEmployeeSchedule)
+router.get("/editSelectedSchedule", schedulesController.editSelectedSchedule)
 
 module.exports = router;

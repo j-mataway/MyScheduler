@@ -17,14 +17,28 @@ exports.getNewSchedule = async (req, res) =>{
 
 exports.getEditSchedule = async (req, res) =>{
     try{
-       const schedules = await Schedule.find({schedules: req.user.location})
-       console.log(schedules)
-       const scheduleDates = schedules
-       res.render("editschedule.ejs")
+       const userLocation = await Location.find({locationName: req.user.location}).lean()
+       const schedules = await Schedule.find({locationNumber: userLocation[0].locationNumber}).lean()
+       const allScheduleDates = schedules.map(schedule => schedule.scheduleStartDate.toString())
+       const uniqueScheduleDates = [...new Set(allScheduleDates)]
+       const scheduleDates = uniqueScheduleDates.map(date => new Date(date).toLocaleDateString())
+       res.render("editschedule.ejs", {scheduleDates:scheduleDates, selectedScheduleDate:null})
    }   catch (err){
        console.log(err)
    }
-   }
+}
+
+exports.editSelectedSchedule = async (req, res) =>{
+    const selectedScheduleDate = req.query.scheduleDate
+  
+    console.log(req.query)
+    try{
+        res.render("editschedule.ejs", {scheduleDates:null, selectedScheduleDate:selectedScheduleDate})
+    }
+    catch(e){
+        console.log(e)
+    }
+}
 
    exports.getViewSchedule = async (req, res) =>{
     try{

@@ -15,24 +15,23 @@
       <!-- One -->
         <section id="one" class="wrapper spotlight style1">
           <div class="inner">
-            <h3>Edit Employee</h3>
-            <!-- <% if(existingScheduleError) { %> -->
-                <p class = "errorMessage">Schedule for that date already exists, select date to edit</p>
-             <!-- <% } %>    -->
-            <form action="/schedules/editSchedule" method="get">
+            <h3>Edit Schedule</h3>
+            <% if (scheduleDates) { %>
+            <form action="/schedules/editSelectedSchedule" method="get">
                 <div class="features">
-                <label for="scheduleDate" >Select Schedule to edit</label>
-                <select name="scheduleDate" class="scheduleDate">
-                        <option value="none" selected disabled hidden> Select Date </option>
-                    <!-- <% for(let i = 0; i<scheduleDates.length; i++) { %>
-                        <option value="<%=`${locations[i].locationName}`%>"% name="location"><%=`${locations[i].locationName}` %></option>
-                    <% } %>    -->
-                    </select> 
+                  <label for="scheduleDate" >Select Schedule to Edit</label>
+                  <select name="scheduleDate" class="schedule">
+                          <option value="none" selected disabled hidden> Select a Date </option>
+                      <% for(let i = 0; i<scheduleDates.length; i++) { %>
+                          <option value="<%=`${scheduleDates[i]}`%>"% name="schedule"><%=`${scheduleDates[i]}` %></option>
+                      <% } %>  
+                  </select>    
                 <ul class="actions">
                     <li><input type="submit" value="Submit"/></li>
                 </ul>
+                </div>
             </form>
-            <% } %>    
+            <% } %>
           </div>
         </section>
         <section id="two" class="wrapper alt spotlight style2">
