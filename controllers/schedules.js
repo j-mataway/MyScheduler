@@ -19,21 +19,26 @@ exports.getEditSchedule = async (req, res) =>{
     try{
        const userLocation = await Location.find({locationName: req.user.location}).lean()
        const schedules = await Schedule.find({locationNumber: userLocation[0].locationNumber}).lean()
-       const allScheduleDates = schedules.map(schedule => schedule.scheduleStartDate.toString())
+       const allScheduleDates = schedules.map(schedule => schedule.scheduleStartDate.toDateString())
        const uniqueScheduleDates = [...new Set(allScheduleDates)]
-       const scheduleDates = uniqueScheduleDates.map(date => new Date(date).toLocaleDateString())
-       res.render("editschedule.ejs", {scheduleDates:scheduleDates, selectedScheduleDate:null})
+       res.render("editschedule.ejs", {scheduleDates:uniqueScheduleDates, selectedScheduleDate:null, schedules:null})
    }   catch (err){
        console.log(err)
    }
 }
 
 exports.editSelectedSchedule = async (req, res) =>{
-    const selectedScheduleDate = req.query.scheduleDate
-  
-    console.log(req.query)
+    const selectedScheduleDate = new Date(req.query.scheduleDate)
+    const scheduleDate = selectedScheduleDate.toLocaleDateString()
+    const allSchedulesWithThisDate = await Schedule.find({scheduleStartDate:selectedScheduleDate}).lean()
+    const userLocation = await Location.find({locationName: req.user.location}).lean()
+    const schedules = allSchedulesWithThisDate.filter(schedule => schedule.locationNumber === userLocation[0].locationNumber) 
+    const gm = schedules.filter(schedule => schedule.employeeSchedule.schedule.employeePosition === 'generalmanager')
+    const managers = schedules.filter(schedule => schedule.employeeSchedule.schedule.employeePosition === 'manager')
+    const crew = schedules.filter(schedule => schedule.employeeSchedule.schedule.employeePosition === 'crew')
+    console.log(gm)
     try{
-        res.render("editschedule.ejs", {scheduleDates:null, selectedScheduleDate:selectedScheduleDate})
+        res.render("editschedule.ejs", {scheduleDates:null, selectedScheduleDate:scheduleDate, gm:gm, managers:managers, crew:crew})
     }
     catch(e){
         console.log(e)
@@ -65,7 +70,6 @@ exports.editSelectedSchedule = async (req, res) =>{
         const scheduleDates = employeeSchedules.map(schedule => schedule.scheduleStartDate.toLocaleDateString())
         const schedule = employeeSchedules.filter(schedule => schedule.scheduleStartDate.toLocaleDateString() === selectedDate)
         const user = req.user
-        console.log(schedule)
         res.render("viewschedule.ejs", {schedules: employeeSchedules, scheduleDates:scheduleDates, schedule: schedule[0], selectedDate: selectedDate, user:user})   
     }
     catch(err){
@@ -81,12 +85,15 @@ exports.createNewSchedule = async (req, res) =>{
     const scheduledEmployees = allEmployees.filter(emp => emp.position !== 'admin') 
                                            .filter(emp => emp.position !== 'districtmanager')
     const schedules = req.body  
+    
     let finalized = false
     if(req.body.finalized){
         finalized=true
     }
-    function EmployeeSchedule (id, schedules){
+    function EmployeeSchedule (id, employeePosition, firstName, schedules){
         this.id = id,
+        this.employeePosition = employeePosition
+        this.firstName = firstName
         this.mondayIn = schedules[`mondayIn_${this.id}`],
         this.mondayOut = schedules[`mondayOut_${this.id}`]
         this.tuesdayIn = schedules[`tuesdayIn_${this.id}`]
@@ -107,7 +114,7 @@ exports.createNewSchedule = async (req, res) =>{
         let employeeSchedule = {}
 
         for(const person of scheduledEmployees){
-            employeeSchedule[`schedule_${person._id}`] = new EmployeeSchedule(person._id, schedules)
+            employeeSchedule[`schedule_${person._id}`] = new EmployeeSchedule(person._id, person.position, person.firstName, schedules)
         }
 
 
@@ -124,15 +131,21 @@ if(existingScheduleDate.length > 0){
 
 for(let i = 0; i<scheduledEmployees.length; i++){
            const currentSchedule = employeeSchedule[`schedule_${scheduledEmployees[i]._id}`]
+           const startDate = new Date(req.body.startdate)   
+           startDate.setMinutes(startDate.getMinutes() + startDate.getTimezoneOffset())   
+           
+           
     try{
         await Schedule.create({
-            scheduleStartDate: req.body.startdate,
+            scheduleStartDate: startDate,
             locationNumber: location.locationNumber,
             createdBy: creator._id,
             finalized:finalized,
             employeeSchedule:{
                 schedule:{
                     employeeId: currentSchedule.id,
+                    employeePosition: currentSchedule.employeePosition,
+                    employeeName: currentSchedule.firstName,
                     mondayIn: currentSchedule.mondayIn,
                     mondayOut: currentSchedule.mondayOut,
                     tuesdayIn: currentSchedule.tuesdayIn,

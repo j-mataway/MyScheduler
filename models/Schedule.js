@@ -23,6 +23,12 @@ const ScheduleSchema = new mongoose.Schema({
             employeeId:{
              type:mongoose.Schema.Types.ObjectId,
             },
+            employeePosition:{
+                type:String
+            },
+            employeeName:{
+                type:String
+            },
             mondayIn:{
                 type:String
             },

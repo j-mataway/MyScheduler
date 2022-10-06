@@ -14,14 +14,15 @@
 
       <!-- One -->
         <section id="one" class="wrapper spotlight style1">
+          <% if (scheduleDates) { %>
           <div class="inner">
             <h3>Edit Schedule</h3>
-            <% if (scheduleDates) { %>
+           
             <form action="/schedules/editSelectedSchedule" method="get">
                 <div class="features">
                   <label for="scheduleDate" >Select Schedule to Edit</label>
                   <select name="scheduleDate" class="schedule">
-                          <option value="none" selected disabled hidden> Select a Date </option>
+                          <option value="none" disabled hidden> Select a Date </option>
                       <% for(let i = 0; i<scheduleDates.length; i++) { %>
                           <option value="<%=`${scheduleDates[i]}`%>"% name="schedule"><%=`${scheduleDates[i]}` %></option>
                       <% } %>  
@@ -31,9 +32,438 @@
                 </ul>
                 </div>
             </form>
-            <% } %>
           </div>
+          <% } else {  %>
+
+      
+          <div class="table-wrapper">
+            <form action="/schedules/createSchedule" method="post">
+              <h3>Schedule for week of: <%=`${selectedScheduleDate}`%></h3>
+            <table>
+              <thead>
+                <!-- dates in the blank spots -->
+                <tr>
+                    <th>Name</th>
+                    <th>Mon</th>
+                    <th></th>
+                    <th>Tues</th>
+                    <th></th>
+                    <th>Wed</th>
+                    <th></th>
+                    <th>Thus</th>
+                    <th></th>
+                    <th>Fri</th>
+                    <th></th>
+                    <th>Sat</th>
+                    <th></th>
+                    <th>Sun</th>
+                    <th></th>
+                </tr>
+                <tr>
+                    <td>Managers</td>
+                    <td>In</td>
+                    <td>out</td>
+                    <td>In</td>
+                    <td>out</td>
+                    <td>In</td>
+                    <td>out</td>
+                    <td>In</td>
+                    <td>out</td>
+                    <td>In</td>
+                    <td>out</td>
+                    <td>In</td>
+                    <td>out</td>
+                    <td>In</td>
+                    <td>out</td>
+                </tr>
+              </thead>
+              <tbody> 
+                <% for(let i=0; i<gm.length; i++){%> 
+                <tr>
+                    <td><%=`${gm[i].employeeSchedule.schedule.employeeName}`%></td>
+                    <td><select name="mondayIn_<%=`${gm[i].employeeSchedule.schedule.employeeId}`%>" id="mondayIn_<%=`${gm[i].employeeSchedule.schedule.employeeId}`%>" class="schedule">
+                       <%
+                       const options = ["off", "10:00am", "10:30am", "11:00am", "11:30am", "12:00pm", "12:30pm", "1:00pm", "1:30pm","2:00pm", "2:30pm", "3:00pm", "3:30pm", "4:00pm", "4:30pm", "5:00pm", "5:30pm", "6:00pm", "6:30pm", "7:00pm", "7:30pm", "8:00pm", "8:30pm", "9:00pm", "9:30pm", "10:00pm"]                       
+                       for(let j = 0; j< options.length; j++){
+                        const selected = gm[i].employeeSchedule.schedule.mondayIn === options[j] ? "selected" : ""
+                        %><option value="<%= options[j] %>" <%= selected %>><%= options[j] %></option><%
+                       } 
+                       %>
+                    </td>
+                    <td><select name="mondayOut_<%=`${gm[i].employeeSchedule.schedule.employeeId}`%>" id="mondayOut_<%=`${gm[i].employeeSchedule.schedule.employeeId}`%>" class="schedule">
+                      <%                      
+                      for(let j = 0; j< options.length; j++){
+                       const selected = gm[i].employeeSchedule.schedule.mondayOut === options[j] ? "selected" : ""
+                       %><option value="<%= options[j] %>" <%= selected %>><%= options[j] %></option><%
+                      } 
+                      %>
+                    </td>
+                    <td><select name="tuesdayIn_<%=`${gm[i].employeeSchedule.schedule.employeeId}`%>" id="tuesdayIn_<%=`${gm[i].employeeSchedule.schedule.employeeId}`%>" class="schedule">
+                      <%                      
+                      for(let j = 0; j< options.length; j++){
+                       const selected = gm[i].employeeSchedule.schedule.tuesdayIn === options[j] ? "selected" : ""
+                       %><option value="<%= options[j] %>" <%= selected %>><%= options[j] %></option><%
+                      } 
+                      %>
+                    </td>
+                    <td><select name="tuesdayOut_<%=`${gm[i].employeeSchedule.schedule.employeeId}`%>" id="tuesdayOut_<%=`${gm[i].employeeSchedule.schedule.employeeId}`%>" class="schedule">
+                      <%                      
+                      for(let j = 0; j< options.length; j++){
+                       const selected = gm[i].employeeSchedule.schedule.tuesdayOut === options[j] ? "selected" : ""
+                       %><option value="<%= options[j] %>" <%= selected %>><%= options[j] %></option><%
+                      } 
+                      %>
+                    </td>
+                    <td><select name="wednesdayIn_<%=`${gm[i].employeeSchedule.schedule.employeeId}`%>" id="wednesdayIn_<%=`${gm[i].employeeSchedule.schedule.employeeId}`%>" class="schedule">
+                      <%                      
+                      for(let j = 0; j< options.length; j++){
+                       const selected = gm[i].employeeSchedule.schedule.wednesdayIn === options[j] ? "selected" : ""
+                       %><option value="<%= options[j] %>" <%= selected %>><%= options[j] %></option><%
+                      } 
+                      %>
+                    </td>
+                    <td><select name="wednesdayOut_<%=`${gm[i].employeeSchedule.schedule.employeeId}`%>" id="wednesdayOut_<%=`${gm[i].employeeSchedule.schedule.employeeId}`%>" class="schedule">
+                      <%                      
+                      for(let j = 0; j< options.length; j++){
+                       const selected = gm[i].employeeSchedule.schedule.wednesdayOut === options[j] ? "selected" : ""
+                       %><option value="<%= options[j] %>" <%= selected %>><%= options[j] %></option><%
+                      } 
+                      %>
+                    </td>
+                    <td><select name="thursdayIn_<%=`${gm[i].employeeSchedule.schedule.employeeId}`%>" id="thursdayIn_<%=`${gm[i].employeeSchedule.schedule.employeeId}`%>" class="schedule">
+                      <%                      
+                      for(let j = 0; j< options.length; j++){
+                       const selected = gm[i].employeeSchedule.schedule.thursdayIn === options[j] ? "selected" : ""
+                       %><option value="<%= options[j] %>" <%= selected %>><%= options[j] %></option><%
+                      } 
+                      %>
+                    </td>
+                    <td><select name="thursdayOut_<%=`${gm[i].employeeSchedule.schedule.employeeId}`%>" id="thursdayOut_<%=`${gm[i].employeeSchedule.schedule.employeeId}`%>" class="schedule">
+                      <%                      
+                      for(let j = 0; j< options.length; j++){
+                       const selected = gm[i].employeeSchedule.schedule.thursdayOut === options[j] ? "selected" : ""
+                       %><option value="<%= options[j] %>" <%= selected %>><%= options[j] %></option><%
+                      } 
+                      %>
+                    </td>
+                    <td><select name="fridayIn_<%=`${gm[i].employeeSchedule.schedule.employeeId}`%>" id="fridayIn_<%=`${gm[i].employeeSchedule.schedule.employeeId}`%>" class="schedule">
+                      <%                      
+                      for(let j = 0; j< options.length; j++){
+                       const selected = gm[i].employeeSchedule.schedule.fridayIn === options[j] ? "selected" : ""
+                       %><option value="<%= options[j] %>" <%= selected %>><%= options[j] %></option><%
+                      } 
+                      %>
+                    </td>       
+                    <td><select name="fridayOut_<%=`${gm[i].employeeSchedule.schedule.employeeId}`%>" id="fridayOut_<%=`${gm[i].employeeSchedule.schedule.employeeId}`%>" class="schedule">
+                      <%                      
+                      for(let j = 0; j< options.length; j++){
+                       const selected = gm[i].employeeSchedule.schedule.fridayOut === options[j] ? "selected" : ""
+                       %><option value="<%= options[j] %>" <%= selected %>><%= options[j] %></option><%
+                      } 
+                      %>
+                    </td>
+                    <td><select name="saturdayIn_<%=`${gm[i].employeeSchedule.schedule.employeeId}`%>" id="saturdayIn_<%=`${gm[i].employeeSchedule.schedule.employeeId}`%>" class="schedule">
+                      <%                      
+                      for(let j = 0; j< options.length; j++){
+                       const selected = gm[i].employeeSchedule.schedule.saturdayIn === options[j] ? "selected" : ""
+                       %><option value="<%= options[j] %>" <%= selected %>><%= options[j] %></option><%
+                      } 
+                      %>
+                    </td>
+                    <td><select name="saturdayOut_<%=`${gm[i].employeeSchedule.schedule.employeeId}`%>" id="saturdayOut_<%=`${gm[i].employeeSchedule.schedule.employeeId}`%>" class="schedule">
+                      <%                      
+                      for(let j = 0; j< options.length; j++){
+                       const selected = gm[i].employeeSchedule.schedule.saturdayOut === options[j] ? "selected" : ""
+                       %><option value="<%= options[j] %>" <%= selected %>><%= options[j] %></option><%
+                      } 
+                      %>
+                    </td>
+                    <td><select name="sundayIn_<%=`${gm[i].employeeSchedule.schedule.employeeId}`%>" id="sundayIn_<%=`${gm[i].employeeSchedule.schedule.employeeId}`%>" class="schedule">
+                      <%                  
+                      for(let j = 0; j< options.length; j++){
+                       const selected = gm[i].employeeSchedule.schedule.sundayIn === options[j] ? "selected" : ""
+                       %><option value="<%= options[j] %>" <%= selected %>><%= options[j] %></option><%
+                      } 
+                      %>
+                    </td>
+                    <td><select name="sundayOut_<%=`${gm[i].employeeSchedule.schedule.employeeId}`%>" id="sundayOut_<%=`${gm[i].employeeSchedule.schedule.employeeId}`%>" class="schedule">
+                      <%                
+                      for(let j = 0; j< options.length; j++){
+                       const selected = gm[i].employeeSchedule.schedule.sundayOut === options[j] ? "selected" : ""
+                       %><option value="<%= options[j] %>" <%= selected %>><%= options[j] %></option><%
+                      } 
+                      %>
+                    </td>
+                </tr>   
+                <% } %>
+                <% for(let i=0; i<managers.length; i++){%> 
+                  <tr>
+                      <td><%=`${managers[i].employeeSchedule.schedule.employeeName}`%></td>
+                      <td><select name="mondayIn_<%=`${managers[i].employeeSchedule.schedule.employeeId}`%>" id="mondayIn_<%=`${managers[i].employeeSchedule.schedule.employeeId}`%>" class="schedule">
+                         <%
+                         const options = ["off", "10:00am", "10:30am", "11:00am", "11:30am", "12:00pm", "12:30pm", "1:00pm", "1:30pm","2:00pm", "2:30pm", "3:00pm", "3:30pm", "4:00pm", "4:30pm", "5:00pm", "5:30pm", "6:00pm", "6:30pm", "7:00pm", "7:30pm", "8:00pm", "8:30pm", "9:00pm", "9:30pm", "10:00pm"]                       
+                         for(let j = 0; j< options.length; j++){
+                          const selected = managers[i].employeeSchedule.schedule.mondayIn === options[j] ? "selected" : ""
+                          %><option value="<%= options[j] %>" <%= selected %>><%= options[j] %></option><%
+                         } 
+                         %>
+                      </td>
+                      <td><select name="mondayOut_<%=`${managers[i].employeeSchedule.schedule.employeeId}`%>" id="mondayOut_<%=`${managers[i].employeeSchedule.schedule.employeeId}`%>" class="schedule">
+                        <%                      
+                        for(let j = 0; j< options.length; j++){
+                         const selected = managers[i].employeeSchedule.schedule.mondayOut === options[j] ? "selected" : ""
+                         %><option value="<%= options[j] %>" <%= selected %>><%= options[j] %></option><%
+                        } 
+                        %>
+                      </td>
+                      <td><select name="tuesdayIn_<%=`${managers[i].employeeSchedule.schedule.employeeId}`%>" id="tuesdayIn_<%=`${managers[i].employeeSchedule.schedule.employeeId}`%>" class="schedule">
+                        <%                      
+                        for(let j = 0; j< options.length; j++){
+                         const selected = managers[i].employeeSchedule.schedule.tuesdayIn === options[j] ? "selected" : ""
+                         %><option value="<%= options[j] %>" <%= selected %>><%= options[j] %></option><%
+                        } 
+                        %>
+                      </td>
+                      <td><select name="tuesdayOut_<%=`${managers[i].employeeSchedule.schedule.employeeId}`%>" id="tuesdayOut_<%=`${managers[i].employeeSchedule.schedule.employeeId}`%>" class="schedule">
+                        <%                      
+                        for(let j = 0; j< options.length; j++){
+                         const selected = managers[i].employeeSchedule.schedule.tuesdayOut === options[j] ? "selected" : ""
+                         %><option value="<%= options[j] %>" <%= selected %>><%= options[j] %></option><%
+                        } 
+                        %>
+                      </td>
+                      <td><select name="wednesdayIn_<%=`${managers[i].employeeSchedule.schedule.employeeId}`%>" id="wednesdayIn_<%=`${managers[i].employeeSchedule.schedule.employeeId}`%>" class="schedule">
+                        <%                      
+                        for(let j = 0; j< options.length; j++){
+                         const selected = managers[i].employeeSchedule.schedule.wednesdayIn === options[j] ? "selected" : ""
+                         %><option value="<%= options[j] %>" <%= selected %>><%= options[j] %></option><%
+                        } 
+                        %>
+                      </td>
+                      <td><select name="wednesdayOut_<%=`${managers[i].employeeSchedule.schedule.employeeId}`%>" id="wednesdayOut_<%=`${managers[i].employeeSchedule.schedule.employeeId}`%>" class="schedule">
+                        <%                      
+                        for(let j = 0; j< options.length; j++){
+                         const selected = managers[i].employeeSchedule.schedule.wednesdayOut === options[j] ? "selected" : ""
+                         %><option value="<%= options[j] %>" <%= selected %>><%= options[j] %></option><%
+                        } 
+                        %>
+                      </td>
+                      <td><select name="thursdayIn_<%=`${managers[i].employeeSchedule.schedule.employeeId}`%>" id="thursdayIn_<%=`${managers[i].employeeSchedule.schedule.employeeId}`%>" class="schedule">
+                        <%                      
+                        for(let j = 0; j< options.length; j++){
+                         const selected = managers[i].employeeSchedule.schedule.thursdayIn === options[j] ? "selected" : ""
+                         %><option value="<%= options[j] %>" <%= selected %>><%= options[j] %></option><%
+                        } 
+                        %>
+                      </td>
+                      <td><select name="thursdayOut_<%=`${managers[i].employeeSchedule.schedule.employeeId}`%>" id="thursdayOut_<%=`${managers[i].employeeSchedule.schedule.employeeId}`%>" class="schedule">
+                        <%                      
+                        for(let j = 0; j< options.length; j++){
+                         const selected = managers[i].employeeSchedule.schedule.thursdayOut === options[j] ? "selected" : ""
+                         %><option value="<%= options[j] %>" <%= selected %>><%= options[j] %></option><%
+                        } 
+                        %>
+                      </td>
+                      <td><select name="fridayIn_<%=`${managers[i].employeeSchedule.schedule.employeeId}`%>" id="fridayIn_<%=`${managers[i].employeeSchedule.schedule.employeeId}`%>" class="schedule">
+                        <%                      
+                        for(let j = 0; j< options.length; j++){
+                         const selected = managers[i].employeeSchedule.schedule.fridayIn === options[j] ? "selected" : ""
+                         %><option value="<%= options[j] %>" <%= selected %>><%= options[j] %></option><%
+                        } 
+                        %>
+                      </td>       
+                      <td><select name="fridayOut_<%=`${managers[i].employeeSchedule.schedule.employeeId}`%>" id="fridayOut_<%=`${managers[i].employeeSchedule.schedule.employeeId}`%>" class="schedule">
+                        <%                      
+                        for(let j = 0; j< options.length; j++){
+                         const selected = managers[i].employeeSchedule.schedule.fridayOut === options[j] ? "selected" : ""
+                         %><option value="<%= options[j] %>" <%= selected %>><%= options[j] %></option><%
+                        } 
+                        %>
+                      </td>
+                      <td><select name="saturdayIn_<%=`${managers[i].employeeSchedule.schedule.employeeId}`%>" id="saturdayIn_<%=`${managers[i].employeeSchedule.schedule.employeeId}`%>" class="schedule">
+                        <%                      
+                        for(let j = 0; j< options.length; j++){
+                         const selected = managers[i].employeeSchedule.schedule.saturdayIn === options[j] ? "selected" : ""
+                         %><option value="<%= options[j] %>" <%= selected %>><%= options[j] %></option><%
+                        } 
+                        %>
+                      </td>
+                      <td><select name="saturdayOut_<%=`${managers[i].employeeSchedule.schedule.employeeId}`%>" id="saturdayOut_<%=`${managers[i].employeeSchedule.schedule.employeeId}`%>" class="schedule">
+                        <%                      
+                        for(let j = 0; j< options.length; j++){
+                         const selected = managers[i].employeeSchedule.schedule.saturdayOut === options[j] ? "selected" : ""
+                         %><option value="<%= options[j] %>" <%= selected %>><%= options[j] %></option><%
+                        } 
+                        %>
+                      </td>
+                      <td><select name="sundayIn_<%=`${managers[i].employeeSchedule.schedule.employeeId}`%>" id="sundayIn_<%=`${managers[i].employeeSchedule.schedule.employeeId}`%>" class="schedule">
+                        <%                  
+                        for(let j = 0; j< options.length; j++){
+                         const selected = managers[i].employeeSchedule.schedule.sundayIn === options[j] ? "selected" : ""
+                         %><option value="<%= options[j] %>" <%= selected %>><%= options[j] %></option><%
+                        } 
+                        %>
+                      </td>
+                      <td><select name="sundayOut_<%=`${managers[i].employeeSchedule.schedule.employeeId}`%>" id="sundayOut_<%=`${managers[i].employeeSchedule.schedule.employeeId}`%>" class="schedule">
+                        <%                
+                        for(let j = 0; j< options.length; j++){
+                         const selected = managers[i].employeeSchedule.schedule.sundayOut === options[j] ? "selected" : ""
+                         %><option value="<%= options[j] %>" <%= selected %>><%= options[j] %></option><%
+                        } 
+                        %>
+                      </td>                                   
+                    </tr> 
+                    <% } %>
+                <tr>
+                    <td>Crew</td>
+                    <td>In</td>
+                    <td>out</td>
+                    <td>In</td>
+                    <td>out</td>
+                    <td>In</td>
+                    <td>out</td>
+                    <td>In</td>
+                    <td>out</td>
+                    <td>In</td>
+                    <td>out</td>
+                    <td>In</td>
+                    <td>out</td>
+                    <td>In</td>
+                    <td>out</td>
+                </tr>
+                <!-- CREW TEMPLATE -->
+                                <% for(let i=0; i<crew.length; i++){%> 
+                  <tr>
+                      <td><%=`${crew[i].employeeSchedule.schedule.employeeName}`%></td>
+                      <td><select name="mondayIn_<%=`${crew[i].employeeSchedule.schedule.employeeId}`%>" id="mondayIn_<%=`${crew[i].employeeSchedule.schedule.employeeId}`%>" class="schedule">
+                         <%
+                         const options = ["off", "10:00am", "10:30am", "11:00am", "11:30am", "12:00pm", "12:30pm", "1:00pm", "1:30pm","2:00pm", "2:30pm", "3:00pm", "3:30pm", "4:00pm", "4:30pm", "5:00pm", "5:30pm", "6:00pm", "6:30pm", "7:00pm", "7:30pm", "8:00pm", "8:30pm", "9:00pm", "9:30pm", "10:00pm"]                       
+                         for(let j = 0; j< options.length; j++){
+                          const selected = crew[i].employeeSchedule.schedule.mondayIn === options[j] ? "selected" : ""
+                          %><option value="<%= options[j] %>" <%= selected %>><%= options[j] %></option><%
+                         } 
+                         %>
+                      </td>
+                      <td><select name="mondayOut_<%=`${crew[i].employeeSchedule.schedule.employeeId}`%>" id="mondayOut_<%=`${crew[i].employeeSchedule.schedule.employeeId}`%>" class="schedule">
+                        <%                      
+                        for(let j = 0; j< options.length; j++){
+                         const selected = crew[i].employeeSchedule.schedule.mondayOut === options[j] ? "selected" : ""
+                         %><option value="<%= options[j] %>" <%= selected %>><%= options[j] %></option><%
+                        } 
+                        %>
+                      </td>
+                      <td><select name="tuesdayIn_<%=`${crew[i].employeeSchedule.schedule.employeeId}`%>" id="tuesdayIn_<%=`${crew[i].employeeSchedule.schedule.employeeId}`%>" class="schedule">
+                        <%                      
+                        for(let j = 0; j< options.length; j++){
+                         const selected = crew[i].employeeSchedule.schedule.tuesdayIn === options[j] ? "selected" : ""
+                         %><option value="<%= options[j] %>" <%= selected %>><%= options[j] %></option><%
+                        } 
+                        %>
+                      </td>
+                      <td><select name="tuesdayOut_<%=`${crew[i].employeeSchedule.schedule.employeeId}`%>" id="tuesdayOut_<%=`${crew[i].employeeSchedule.schedule.employeeId}`%>" class="schedule">
+                        <%                      
+                        for(let j = 0; j< options.length; j++){
+                         const selected = crew[i].employeeSchedule.schedule.tuesdayOut === options[j] ? "selected" : ""
+                         %><option value="<%= options[j] %>" <%= selected %>><%= options[j] %></option><%
+                        } 
+                        %>
+                      </td>
+                      <td><select name="wednesdayIn_<%=`${crew[i].employeeSchedule.schedule.employeeId}`%>" id="wednesdayIn_<%=`${crew[i].employeeSchedule.schedule.employeeId}`%>" class="schedule">
+                        <%                      
+                        for(let j = 0; j< options.length; j++){
+                         const selected = crew[i].employeeSchedule.schedule.wednesdayIn === options[j] ? "selected" : ""
+                         %><option value="<%= options[j] %>" <%= selected %>><%= options[j] %></option><%
+                        } 
+                        %>
+                      </td>
+                      <td><select name="wednesdayOut_<%=`${crew[i].employeeSchedule.schedule.employeeId}`%>" id="wednesdayOut_<%=`${crew[i].employeeSchedule.schedule.employeeId}`%>" class="schedule">
+                        <%                      
+                        for(let j = 0; j< options.length; j++){
+                         const selected = crew[i].employeeSchedule.schedule.wednesdayOut === options[j] ? "selected" : ""
+                         %><option value="<%= options[j] %>" <%= selected %>><%= options[j] %></option><%
+                        } 
+                        %>
+                      </td>
+                      <td><select name="thursdayIn_<%=`${crew[i].employeeSchedule.schedule.employeeId}`%>" id="thursdayIn_<%=`${crew[i].employeeSchedule.schedule.employeeId}`%>" class="schedule">
+                        <%                      
+                        for(let j = 0; j< options.length; j++){
+                         const selected = crew[i].employeeSchedule.schedule.thursdayIn === options[j] ? "selected" : ""
+                         %><option value="<%= options[j] %>" <%= selected %>><%= options[j] %></option><%
+                        } 
+                        %>
+                      </td>
+                      <td><select name="thursdayOut_<%=`${crew[i].employeeSchedule.schedule.employeeId}`%>" id="thursdayOut_<%=`${crew[i].employeeSchedule.schedule.employeeId}`%>" class="schedule">
+                        <%                      
+                        for(let j = 0; j< options.length; j++){
+                         const selected = crew[i].employeeSchedule.schedule.thursdayOut === options[j] ? "selected" : ""
+                         %><option value="<%= options[j] %>" <%= selected %>><%= options[j] %></option><%
+                        } 
+                        %>
+                      </td>
+                      <td><select name="fridayIn_<%=`${crew[i].employeeSchedule.schedule.employeeId}`%>" id="fridayIn_<%=`${crew[i].employeeSchedule.schedule.employeeId}`%>" class="schedule">
+                        <%                      
+                        for(let j = 0; j< options.length; j++){
+                         const selected = crew[i].employeeSchedule.schedule.fridayIn === options[j] ? "selected" : ""
+                         %><option value="<%= options[j] %>" <%= selected %>><%= options[j] %></option><%
+                        } 
+                        %>
+                      </td>       
+                      <td><select name="fridayOut_<%=`${crew[i].employeeSchedule.schedule.employeeId}`%>" id="fridayOut_<%=`${crew[i].employeeSchedule.schedule.employeeId}`%>" class="schedule">
+                        <%                      
+                        for(let j = 0; j< options.length; j++){
+                         const selected = crew[i].employeeSchedule.schedule.fridayOut === options[j] ? "selected" : ""
+                         %><option value="<%= options[j] %>" <%= selected %>><%= options[j] %></option><%
+                        } 
+                        %>
+                      </td>
+                      <td><select name="saturdayIn_<%=`${crew[i].employeeSchedule.schedule.employeeId}`%>" id="saturdayIn_<%=`${crew[i].employeeSchedule.schedule.employeeId}`%>" class="schedule">
+                        <%                      
+                        for(let j = 0; j< options.length; j++){
+                         const selected = crew[i].employeeSchedule.schedule.saturdayIn === options[j] ? "selected" : ""
+                         %><option value="<%= options[j] %>" <%= selected %>><%= options[j] %></option><%
+                        } 
+                        %>
+                      </td>
+                      <td><select name="saturdayOut_<%=`${crew[i].employeeSchedule.schedule.employeeId}`%>" id="saturdayOut_<%=`${crew[i].employeeSchedule.schedule.employeeId}`%>" class="schedule">
+                        <%                      
+                        for(let j = 0; j< options.length; j++){
+                         const selected = crew[i].employeeSchedule.schedule.saturdayOut === options[j] ? "selected" : ""
+                         %><option value="<%= options[j] %>" <%= selected %>><%= options[j] %></option><%
+                        } 
+                        %>
+                      </td>
+                      <td><select name="sundayIn_<%=`${crew[i].employeeSchedule.schedule.employeeId}`%>" id="sundayIn_<%=`${crew[i].employeeSchedule.schedule.employeeId}`%>" class="schedule">
+                        <%                  
+                        for(let j = 0; j< options.length; j++){
+                         const selected = crew[i].employeeSchedule.schedule.sundayIn === options[j] ? "selected" : ""
+                         %><option value="<%= options[j] %>" <%= selected %>><%= options[j] %></option><%
+                        } 
+                        %>
+                      </td>
+                      <td><select name="sundayOut_<%=`${crew[i].employeeSchedule.schedule.employeeId}`%>" id="sundayOut_<%=`${crew[i].employeeSchedule.schedule.employeeId}`%>" class="schedule">
+                        <%                
+                        for(let j = 0; j< options.length; j++){
+                         const selected = crew[i].employeeSchedule.schedule.sundayOut === options[j] ? "selected" : ""
+                         %><option value="<%= options[j] %>" <%= selected %>><%= options[j] %></option><%
+                        } 
+                        %>
+                      </td>                                   
+                    </tr>
+                    <% } %>
+              </tbody>  
+            </table>
+            <input type="checkbox" id="finalized" name="finalized" value="Finalized">
+            <label for="finalized">Finalized</label>
+            <ul class="actions">
+                <li><input type="submit" value="Submit"/></li>
+            </ul>
+        </form>
+            </div>
+         <% } %>   
+
+
         </section>
+    </section>
         <section id="two" class="wrapper alt spotlight style2">
           <div class="inner">
             <div class ="features">
