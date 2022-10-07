@@ -18,60 +18,58 @@ const ScheduleSchema = new mongoose.Schema({
     default: false,
     required: true,
   },
-  employeeSchedule:{
-        schedule:{
-            employeeId:{
-             type:mongoose.Schema.Types.ObjectId,
-            },
-            employeePosition:{
-                type:String
-            },
-            employeeName:{
-                type:String
-            },
-            mondayIn:{
-                type:String
-            },
-            mondayOut:{
-                type:String
-            },
-            tuesdayIn:{
-                type:String
-            },
-            tuesdayOut:{
-                type:String
-            },
-            wednesdayIn:{
-                type:String
-            },
-            wednesdayOut:{
-                type:String
-            },
-            thursdayIn:{
-                type:String
-            },
-            thursdayOut:{
-                type:String
-            },
-            fridayIn:{
-                type:String
-            },
-            fridayOut:{
-                type:String
-            },
-            saturdayIn:{
-                type:String
-            },
-            saturdayOut:{
-                type:String
-            },
-            sundayIn:{
-                type:String
-            },
-            sundayOut:{
-                type:String
-            },
-  }},
+ 
+employeeId:{
+ type:mongoose.Schema.Types.ObjectId,
+},
+employeePosition:{
+    type:String
+},
+employeeName:{
+    type:String
+},
+mondayIn:{
+    type:String
+},
+mondayOut:{
+    type:String
+},
+tuesdayIn:{
+    type:String
+},
+tuesdayOut:{
+    type:String
+},
+wednesdayIn:{
+    type:String
+},
+wednesdayOut:{
+    type:String
+},
+thursdayIn:{
+    type:String
+},
+thursdayOut:{
+    type:String
+},
+fridayIn:{
+    type:String
+},
+fridayOut:{
+    type:String
+},
+saturdayIn:{
+    type:String
+},
+saturdayOut:{
+    type:String
+},
+sundayIn:{
+    type:String
+},
+sundayOut:{
+    type:String
+},
   createdAt:{
     type: Date,
     default: Date.now,

@@ -1,6 +1,7 @@
 const Schedule = require("../models/Schedule")
 const User = require("../models/User")
 const Location = require("../models/Location")
+const { findOneAndUpdate } = require("../models/Schedule")
 
 
 exports.getNewSchedule = async (req, res) =>{
@@ -33,12 +34,59 @@ exports.editSelectedSchedule = async (req, res) =>{
     const allSchedulesWithThisDate = await Schedule.find({scheduleStartDate:selectedScheduleDate}).lean()
     const userLocation = await Location.find({locationName: req.user.location}).lean()
     const schedules = allSchedulesWithThisDate.filter(schedule => schedule.locationNumber === userLocation[0].locationNumber) 
-    const gm = schedules.filter(schedule => schedule.employeeSchedule.schedule.employeePosition === 'generalmanager')
-    const managers = schedules.filter(schedule => schedule.employeeSchedule.schedule.employeePosition === 'manager')
-    const crew = schedules.filter(schedule => schedule.employeeSchedule.schedule.employeePosition === 'crew')
-    console.log(gm)
+    const gm = schedules.filter(schedule => schedule.employeePosition === 'generalmanager')
+    const managers = schedules.filter(schedule => schedule.employeePosition === 'manager')
+    const crew = schedules.filter(schedule => schedule.employeePosition === 'crew')
     try{
-        res.render("editschedule.ejs", {scheduleDates:null, selectedScheduleDate:scheduleDate, gm:gm, managers:managers, crew:crew})
+        res.render("editschedule.ejs", {scheduleDates:null, selectedScheduleDate:scheduleDate, gm:gm, managers:managers, crew:crew, schedules:schedules})
+    }
+    catch(e){
+        console.log(e)
+    }
+}
+
+exports.editSchedule = async (req, res) => {
+    let date = new Date(req.params.date)
+    date = date.toDateString()
+    const schedules = {}
+    
+    for(const day in req.body){
+        const [scheduleDay, id] = day.split('_')
+        const value = req.body[day]
+        if(!schedules[`schedule_${id}`]){
+        schedules[`schedule_${id}`] = new NewSchedule(scheduleDay, value)
+        }else{
+        schedules[`schedule_${id}`][`${scheduleDay}`] = value   
+        }
+    }
+
+    function NewSchedule (day, value){  
+        this[`${day}`] = value 
+    }
+
+    try{
+        for(const schedule in schedules){
+            const [day, id] = schedule.split('_')
+            await Schedule.findOneAndUpdate(
+                {_id:id},
+                {   mondayIn: schedules[schedule].mondayIn,
+                    mondayOut: schedules[schedule].mondayOut,
+                    tuesdayIn: schedules[schedule].tuesdayIn,
+                    tuesdayOut: schedules[schedule].tuesdayOut,
+                    wednesdayIn: schedules[schedule].wednesdayIn,
+                    wednesdayOut: schedules[schedule].wednesdayOut,
+                    thursdayIn: schedules[schedule].thursdayIn,
+                    thursdayOut: schedules[schedule].thursdayOut,
+                    fridayIn: schedules[schedule].fridayIn,
+                    fridayOut: schedules[schedule].fridayOut,
+                    saturdayIn: schedules[schedule].saturdayIn,
+                    saturdayOut: schedules[schedule].saturdayOut,
+                    sundayIn: schedules[schedule].sundayIn,
+                    sundayOut: schedules[schedule].sundayOut
+                }
+            )   
+            }          
+     res.redirect(`/schedules/editSelectedSchedule?scheduleDate=${date}`)   
     }
     catch(e){
         console.log(e)
@@ -79,9 +127,9 @@ exports.editSelectedSchedule = async (req, res) =>{
 
 exports.createNewSchedule = async (req, res) =>{
     const creator = req.user   
-    const existingScheduleDate = await Schedule.find({scheduleStartDate:req.body.startdate})
-    const location = await Location.findOne({locationName: creator.location}).lean()
-    const allEmployees = await User.find({location :location.locationName}).lean()
+    const existingScheduleDate = await Schedule.find({scheduleStartDate : req.body.startdate})
+    const location = await Location.findOne({locationName : creator.location}).lean()
+    const allEmployees = await User.find({location : location.locationName}).lean()
     const scheduledEmployees = allEmployees.filter(emp => emp.position !== 'admin') 
                                            .filter(emp => emp.position !== 'districtmanager')
     const schedules = req.body  
@@ -141,29 +189,25 @@ for(let i = 0; i<scheduledEmployees.length; i++){
             locationNumber: location.locationNumber,
             createdBy: creator._id,
             finalized:finalized,
-            employeeSchedule:{
-                schedule:{
-                    employeeId: currentSchedule.id,
-                    employeePosition: currentSchedule.employeePosition,
-                    employeeName: currentSchedule.firstName,
-                    mondayIn: currentSchedule.mondayIn,
-                    mondayOut: currentSchedule.mondayOut,
-                    tuesdayIn: currentSchedule.tuesdayIn,
-                    tuesdayOut: currentSchedule.tuesdayOut,
-                    wednesdayIn: currentSchedule.wednesdayIn,
-                    wednesdayOut: currentSchedule.wednesdayOut,
-                    thursdayIn: currentSchedule.thursdayIn,
-                    thursdayOut: currentSchedule.thursdayOut,
-                    fridayIn: currentSchedule.fridayIn,
-                    fridayOut: currentSchedule.fridayOut,
-                    saturdayIn: currentSchedule.saturdayIn,
-                    saturdayOut: currentSchedule.saturdayOut,
-                    sundayIn: currentSchedule.sundayIn,
-                    sundayOut: currentSchedule.sundayOut,
-                },
-
+            employeeId: currentSchedule.id,
+            employeePosition: currentSchedule.employeePosition,
+            employeeName: currentSchedule.firstName,
+            mondayIn: currentSchedule.mondayIn,
+            mondayOut: currentSchedule.mondayOut,
+            tuesdayIn: currentSchedule.tuesdayIn,
+            tuesdayOut: currentSchedule.tuesdayOut,
+            wednesdayIn: currentSchedule.wednesdayIn,
+            wednesdayOut: currentSchedule.wednesdayOut,
+            thursdayIn: currentSchedule.thursdayIn,
+            thursdayOut: currentSchedule.thursdayOut,
+            fridayIn: currentSchedule.fridayIn,
+            fridayOut: currentSchedule.fridayOut,
+            saturdayIn: currentSchedule.saturdayIn,
+            saturdayOut: currentSchedule.saturdayOut,
+            sundayIn: currentSchedule.sundayIn,
+            sundayOut: currentSchedule.sundayOut,
             }
-    })
+    )
 
 
 }
