@@ -20,12 +20,16 @@
               <% if (user.position === 'admin') { %>
               <a href ="/createLocation" class="button">Add New Location</a>
               <a href ="/editLocation" class="button">Edit Location</a>
-              <% } %>  
+              <% } 
+               if (user.position === 'admin' || user.position === 'districtmanager' || user.position === 'generalmanager') { console.log(user)%>  
               <a href ="/createUser" class="button">Add Employee</a>
               <a href ="/editUser" class="button">Edit Employee</a>
               <a href ="/newSchedule" class="button">Create Schedule</a>
               <a href ="/editSchedule" class="button">Edit Schedule</a>
+              <% } 
+               if (user.position === 'creq' || user.position === 'manager' || user.position === 'generalmanager') { console.log(user)%>  
               <a href ="/viewSchedule" class="button">View Schedule</a>
+              <% } %>
               </div>
 
           </div>

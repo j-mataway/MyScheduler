@@ -97,12 +97,14 @@ exports.editSchedule = async (req, res) => {
     try{
        const schedule = null 
        const id = req.user._id 
+       const user = req.user
        const userLocation = await Location.findOne({locationName: req.user.location}).lean()
        const locationNumber = userLocation.locationNumber
        const schedules = await Schedule.find({locationNumber: locationNumber})
+       const allScheduleDates = new Set(schedules.map(schedule => schedule.scheduleStartDate.toLocaleDateString()))
        const employeeSchedules = schedules.filter(schedule => schedule.employeeId.equals(id))
        const scheduleDates = employeeSchedules.map(schedule => schedule.scheduleStartDate.toLocaleDateString())
-       res.render("viewschedule.ejs", {schedules: employeeSchedules, scheduleDates:scheduleDates, schedule: schedule})
+       res.render("viewschedule.ejs", {schedules: employeeSchedules, scheduleDates:scheduleDates, schedule: schedule, allScheduleDates:allScheduleDates, user:user})
    }   catch (err){
        console.log(err)
    }
@@ -117,7 +119,6 @@ exports.editSchedule = async (req, res) => {
         const employeeSchedules = schedules.filter(schedule => schedule.employeeId.equals(id))
         const scheduleDates = employeeSchedules.map(schedule => schedule.scheduleStartDate.toLocaleDateString())
         const schedule = employeeSchedules.filter(schedule => schedule.scheduleStartDate.toLocaleDateString() === selectedDate)
-        console.log(schedule[0])
         const user = req.user
         res.render("viewschedule.ejs", {schedules: employeeSchedules, scheduleDates:scheduleDates, schedule: schedule[0], selectedDate: selectedDate, user:user})   
     }

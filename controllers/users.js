@@ -31,7 +31,6 @@ exports.getEmployee = async (req, res) =>{
         const firstName = req.query.employees.split(' ')[0]
         const lastName = req.query.employees.split(' ')[1]
         const employee = await User.findOne({firstName: firstName, lastName:lastName})
-        console.log(employee)
         res.render("edituser.ejs", { locations:locations, locationEmployees:locationEmployees, employee:employee})
     }   catch (err){
         console.log(err)

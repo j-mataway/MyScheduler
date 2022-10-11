@@ -44,7 +44,6 @@ exports.getLocation = async (req, res) =>{
   }
 }
 exports.editLocation = async (req, res) =>{
-  console.log(req.body)
   try{
       await Location.findOneAndUpdate(
           {_id: req.params.id},

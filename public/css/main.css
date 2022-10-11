@@ -3028,6 +3028,8 @@ input, select, textarea {
 		-ms-flex-wrap: wrap;
 		flex-wrap: wrap;
 		margin: 0 0 2em 0;
+		align-items: center;	
+		justify-content: center;
 	}
 
 		.features article {
@@ -3060,7 +3062,9 @@ input, select, textarea {
 					.features .button{
 						margin: 2em 1em;
 						max-width: 25%;
-						min-width: 200px;
+						min-width: 250px;
+						align-self: center;
+						padding: 0 auto;
 					}
 
 		@media screen and (max-width: 980px) {
@@ -3098,6 +3102,10 @@ input, select, textarea {
 				.features article {
 					width: 100%;
 					margin: 0 0 2em 0 !important;
+				}
+
+				.inner .button{
+					min-width: 100px;
 				}
 
 		}
