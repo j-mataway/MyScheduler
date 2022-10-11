@@ -30,45 +30,45 @@
                     <li><input type="submit" value="Submit" /></li>
                 </ul>
             </form>
-            <% }else{ console.log(schedule.employeeSchedule.schedule)%>
+            <% }else{ console.log(schedule)%>
                 <h3>View Schedule</h3>
                 <div class="features">
                  <ul class="alt">
                     <li>Schedule for week beginning <%=`${selectedDate}`%> for <%=`${user.firstName} ${user.lastName}`%></li>
-                    <% if (schedule.employeeSchedule.schedule.mondayIn === 'off') { %>
+                    <% if (schedule.mondayIn === 'off') { %>
                     <li>Monday - OFF</li>
                     <%}else{%>     
-                    <li>Monday - <%=`${schedule.employeeSchedule.schedule.mondayIn} to ${schedule.employeeSchedule.schedule.mondayOut}`%></li> 
+                    <li>Monday - <%=`${schedule.mondayIn} to ${schedule.mondayOut}`%></li> 
                     <%}%>
-                    <% if (schedule.employeeSchedule.schedule.tuesdayIn === 'off') { %>
+                    <% if (schedule.tuesdayIn === 'off') { %>
                     <li>Tuesday - OFF</li>
                     <%}else{%>     
-                    <li>Tuesday - <%=`${schedule.employeeSchedule.schedule.tuesdayIn} to ${schedule.employeeSchedule.schedule.tuesdayOut}`%></li> 
+                    <li>Tuesday - <%=`${schedule.tuesdayIn} to ${schedule.tuesdayOut}`%></li> 
                     <%}%>
-                    <% if (schedule.employeeSchedule.schedule.wednesdayIn === 'off') { %>
+                    <% if (schedule.wednesdayIn === 'off') { %>
                     <li>Wednesday - OFF</li>
                     <%}else{%>     
-                    <li>Wednesday - <%=`${schedule.employeeSchedule.schedule.wednesdayIn} to ${schedule.employeeSchedule.schedule.wednesdayOut}`%></li> 
+                    <li>Wednesday - <%=`${schedule.wednesdayIn} to ${schedule.wednesdayOut}`%></li> 
                     <%}%>
-                    <% if (schedule.employeeSchedule.schedule.thursdayIn === 'off') { %>
+                    <% if (schedule.thursdayIn === 'off') { %>
                     <li>Thursday - OFF</li>
                     <%}else{%>     
-                    <li>Thursday - <%=`${schedule.employeeSchedule.schedule.thursdayIn} to ${schedule.employeeSchedule.schedule.thursdayOut}`%></li> 
+                    <li>Thursday - <%=`${schedule.thursdayIn} to ${schedule.thursdayOut}`%></li> 
                     <%}%>
-                    <% if (schedule.employeeSchedule.schedule.fridayIn === 'off') { %>
+                    <% if (schedule.fridayIn === 'off') { %>
                     <li>Friday - OFF</li>
                     <%}else{%>     
-                    <li>Friday - <%=`${schedule.employeeSchedule.schedule.fridayIn} to ${schedule.employeeSchedule.schedule.fridayOut}`%></li> 
+                    <li>Friday - <%=`${schedule.fridayIn} to ${schedule.fridayOut}`%></li> 
                     <%}%>
-                    <% if (schedule.employeeSchedule.schedule.saturdayIn === 'off') { %>
+                    <% if (schedule.saturdayIn === 'off') { %>
                     <li>Saturday - OFF</li>
                     <%}else{%>     
-                    <li>Saturday - <%=`${schedule.employeeSchedule.schedule.saturdayIn} to ${schedule.employeeSchedule.schedule.saturdayOut}`%></li> 
+                    <li>Saturday - <%=`${schedule.saturdayIn} to ${schedule.saturdayOut}`%></li> 
                     <%}%>
-                    <% if (schedule.employeeSchedule.schedule.sundayIn === 'off') { %>
+                    <% if (schedule.sundayIn === 'off') { %>
                     <li>Sunday - OFF</li>
                     <%}else{%>     
-                    <li>Sunday - <%=`${schedule.employeeSchedule.schedule.sundayIn} to ${schedule.employeeSchedule.schedule.sundayOut}`%></li> 
+                    <li>Sunday - <%=`${schedule.sundayIn} to ${schedule.sundayOut}`%></li> 
                     <%}%>
                  </ul>
                 </div>   

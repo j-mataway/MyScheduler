@@ -100,7 +100,7 @@ exports.editSchedule = async (req, res) => {
        const userLocation = await Location.findOne({locationName: req.user.location}).lean()
        const locationNumber = userLocation.locationNumber
        const schedules = await Schedule.find({locationNumber: locationNumber})
-       const employeeSchedules = schedules.filter(schedule => schedule.employeeSchedule.schedule.employeeId.equals(id))
+       const employeeSchedules = schedules.filter(schedule => schedule.employeeId.equals(id))
        const scheduleDates = employeeSchedules.map(schedule => schedule.scheduleStartDate.toLocaleDateString())
        res.render("viewschedule.ejs", {schedules: employeeSchedules, scheduleDates:scheduleDates, schedule: schedule})
    }   catch (err){
@@ -114,9 +114,10 @@ exports.editSchedule = async (req, res) => {
         const userLocation = await Location.findOne({locationName: req.user.location}).lean()
         const locationNumber = userLocation.locationNumber
         const schedules = await Schedule.find({locationNumber: locationNumber})
-        const employeeSchedules = schedules.filter(schedule => schedule.employeeSchedule.schedule.employeeId.equals(id))
+        const employeeSchedules = schedules.filter(schedule => schedule.employeeId.equals(id))
         const scheduleDates = employeeSchedules.map(schedule => schedule.scheduleStartDate.toLocaleDateString())
         const schedule = employeeSchedules.filter(schedule => schedule.scheduleStartDate.toLocaleDateString() === selectedDate)
+        console.log(schedule[0])
         const user = req.user
         res.render("viewschedule.ejs", {schedules: employeeSchedules, scheduleDates:scheduleDates, schedule: schedule[0], selectedDate: selectedDate, user:user})   
     }
