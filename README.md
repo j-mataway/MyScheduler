@@ -13,6 +13,7 @@ Node.js for the backend.  Html templating done with EJS.  MongoDB used for the d
 ## Optimizations
 
 Short Term - create algorithm for sales projection and schedule have/needs.  Improve finalized schedule and approval functionality.
+
 Long Term - Rebuild templating using React 
 ## Lessons Learned:
 
@@ -43,7 +44,7 @@ The importance of clean schemas when working with the database.  Data manipulati
 <a target="_blank" href="https://sith.up.railway.app/">Stay in the Hunt - Calendar/activity tracker</a>
       <br />
         <a target="_blank" href="https://sith.up.railway.app/">
-          <img src=https://github.com/j-mataway/stay-in-the-hunt/blob/main/public/images/ss.png" width="100%" alt="SITH App"/>
+          <img src="https://github.com/j-mataway/stay-in-the-hunt/blob/main/public/images/ss.png" width="100%" alt="SITH App"/>
         </a>
     </td>
   </tr>
